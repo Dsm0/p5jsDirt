@@ -1,0 +1,10 @@
+{
+    "name": "p5jsDirt (framework taken from osc.js-chrome-app)",
+    "version": "0.1",
+    "main": "launch.js",
+    "ignore": [],
+    "dependencies": {
+        "osc": "2.3.0",
+        "p5": "^0.10.2"
+    }
+}

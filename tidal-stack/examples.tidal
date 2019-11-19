@@ -1,0 +1,21 @@
+
+cps (126/60/4)
+
+hush
+
+d1 silence
+
+d4 silence
+
+d2 $ slow 2 $ s "casio [casio*2] ~ ~" # speed "<0.4 0.6>"
+
+d3 $ sound ((cat ["can*8", "[cp*4 sn*4, jvbass*16]"] ))
+
+d4 $ slow 2 $ s "bd bd bd bd bd bd [bd*4] [bd*4]"
+
+d1 $ sound "voodoo:6 drum:2 drum:1 [~ voodoo:6]" |+|
+     speed "0.3 0.2 0.4 0.3" |+|
+     vowel "o" |+|
+     shape "0.05 0.2 0.4 0.6" |+|
+     vowel "a e i o u ~"
+
