@@ -1,0 +1,35 @@
+d1 $ "bd*4" # pSize 400
+
+
+
+
+d1 $ "bd*32"
+
+# lpf 200 # hpf
+
+ # pSize (slow 8 $ 500*sine)
+    # pXY (slow 8 $ 500*sine) (slow 8 $ 500*sine)
+    |-| pXY 200 200
+
+d1 $ "bd*32"
+# pSize (slow 8 $ 500*sine)
+    # pXY (slow 8 $ 500*sine) (slow 8 $ 500*sine)
+    |-| pXY 200 200
+
+d1 $ "bd*32"  # gain 2
+-- # pSize 200
+            # pSize (slow 8 $ sine*300)
+             # pXY (slow 8 $ sine*600 + rand*200) (slow 8 $ sine*600 + rand*200)
+             |+| pXY (-400) (-400)
+
+d2 $ "hc*4"
+# hpf 200
+
+
+let pFont = pS "font"
+    pRotate = pF "rotate"
+    testFont = "AkrutiTml2Bold-48.vlw"
+    pX = pF "x"
+    pSize = pF "dispTextSize"
+    pY = pF "y"
+    pXY x y = (pX x # pY y)
