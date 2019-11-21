@@ -1,6 +1,9 @@
 {-# LANGUAGE ConstraintKinds, GeneralizedNewtypeDeriving, FlexibleContexts, ScopedTypeVariables, BangPatterns #-}
 {-# OPTIONS_GHC -fno-warn-missing-fields #-}
 
+-- this is an exact copy of the Stream.hs module in tidalcycles,
+-- it's included here mostly for referencing
+
 module Sound.Tidal.Stream where
 
 import           Control.Applicative ((<|>))
@@ -365,6 +368,9 @@ streamFirst st p
              ) (sCxs st)
        mapM_ (doCps $ sTempoMV st) cpsChanges
        return ()
+
+
+
 
 withPatId :: Stream -> PatId -> (PlayState -> PlayState) -> IO ()
 withPatId s k f = withPatIds s [k] f

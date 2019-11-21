@@ -5,16 +5,8 @@
 
 import Sound.Tidal.Context
 
-
--- :{
--- let p5jsTarget :: OSCTarget
---     p5jsTarget = superdirtTarget {  oName = "processing",
---                                     oAddress = "127.0.0.1", oPort = 57130,
---                                     oLatency = 0.1,
---                                     oTimestamp = MessageStamp
---                                   }
--- :}
-
+-- import Sound.Tidal.Pattern
+-- import Sound.Tidal.Config
 
 :{
 let p5jsTarget :: OSCTarget
@@ -33,11 +25,21 @@ import Data.List
 
 :{
 tidal <- startMulti
-          [superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
-            ,p5jsTarget
+          [
+          -- superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
+          --   ,
+            p5jsTarget
               ]
          (defaultConfig {cFrameTimespan = 1/20})
 :}
+
+-- :{
+-- justP5 <- startMulti
+--           [superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57131}]
+--          (defaultConfig {cFrameTimespan = 1/20})
+-- :}
+
+
 
 :{
 let p = streamReplace tidal
