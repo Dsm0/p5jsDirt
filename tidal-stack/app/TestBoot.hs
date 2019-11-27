@@ -20,5 +20,8 @@ tidal <- startMulti
       [p5jsTarget]
      (defaultConfig {cFrameTimespan = 1/20})
 :}
+:{
+let sendFunc = streamFirst' tidal
+:}
 
 :set prompt "test> "

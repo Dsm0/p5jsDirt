@@ -105,5 +105,14 @@ let setI = streamSetI tidal
     setB = streamSetB tidal
 :}
 
+:{
+    -- FUNCTIONS TO INTERFACE WITH P5DIRT
+let sendFunc x = streamFirst tidal
+    makeFakeMap x = Map.fromList [("func",VS x)]
+    toEvent' ws we ps pe v = Event (Just $ Arc ws we) (Arc ps pe) v
+      where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
+    makeFunc x = Pattern $ fakeEvent (makeFakeMap x :: ControlMap)
+      where fakeEvent a y = [(toEvent' 0 1 0 1) a]
+:}
 
 :set prompt "tidal> "

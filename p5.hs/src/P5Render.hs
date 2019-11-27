@@ -46,7 +46,11 @@ instance (Renderer a) => Renderer (P5Func a) where
   render (Func a) = render a
   render (FuncList as) = concatMap ((++ "\n") . render) as
 
-fc x = FuncList x
 instance (Renderer a, Renderer [a]) => Renderer (ListM a) where
   render :: Renderer a => ListM a -> JavaScript
   render = (render . toList)
+
+listEnumToFunc :: Monad m => [m a] -> m ()
+listEnumToFunc' [] _ = return ()
+listEnumToFunc' (x:xs) arg = x >>= (\y -> listEnumToFunc' xs arg)
+listEnumToFunc listEnum = listEnumToFunc' listEnum Nothing

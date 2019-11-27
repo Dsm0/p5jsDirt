@@ -69,28 +69,29 @@
     };
 
     // Also bind to a UDP socket.
-    var udpPort = new osc.UDPPort({
+    var tidalUdpPort = new osc.UDPPort({
         localAddress: "0.0.0.0",
         localPort: 57130
     });
 
-    udpPort.on("ready", function () {
+
+    tidalUdpPort.on("ready", function () {
         var ipAddresses = getIPAddresses(),
             addressPortStrings = [];
 
         ipAddresses.forEach(function (address) {
-            addressPortStrings.push(address + ":" + udpPort.options.localPort);
+            addressPortStrings.push(address + ":" + tidalUdpPort.options.localPort);
         });
 
         $("#udpStatus").append("<div>UDP: <span>" + addressPortStrings.join(",") + "</span></div>");
     });
 
-    udpPort.on("message", oscMessageListener);
-    udpPort.on("error", function (err) {
+    tidalUdpPort.on("message", oscMessageListener);
+    tidalUdpPort.on("error", function (err) {
         throw new Error(err);
     });
 
-    udpPort.open();
+    tidalUdpPort.open();
 
     // Start playing the synth.
     // flock.init();

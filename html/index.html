@@ -11,11 +11,17 @@
     <p id="messageLabel">OSC Message:</p>
     <pre id="message"></pre>
 </div> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/p5/lib/p5.min.js"></script>
 <script src="../node_modules/p5/lib/p5.dom.min.js"></script>
 <script src="../node_modules/osc/dist/osc-chromeapp.min.js"></script>
 <script src="../node_modules/osc/dist/osc-chromeapp.min.js"></script>
+<script src="../js/remove.js"></script>
 <script src="../js/superDirt.js"></script>
 <script src="../js/thingClass.js"></script>
 <script src="../js/app.js"></script>
+  <!-- <head>
+    <title>My Sketch</title>
+    <script src="../js/superDirt.js"></script>
+  </head> -->

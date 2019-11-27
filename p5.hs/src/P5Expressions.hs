@@ -63,23 +63,31 @@ instance (RealFrac a, Show a, Enum a) => Enum (ArgEx a) where
     where toNum = fromInteger . toInteger
 
 
--- instance (Fractional a, Show a) => Floating (ArgEx a) where
---   exp
---     where w = value argex
---           f0 = varFunc argex
-    -- log, sqrt      :: a -> a
---     -- (**), logBase       :: a -> a -> a
---     -- sin, cos, tan       :: a -> a
---     -- asin, acos, atan    :: a -> a
---     -- sinh, cosh, tanh    :: a -> a
---     -- asinh, acosh, atanh :: a -> a
---     x ** y  =  exp (log x * y)
---       where (w,z) = ((value argex0), (value argex1))
---             (f0,f1) = ((varFunc argex0), (varFunc argex1))
---     logBase x y      =  log y / log x
---     sqrt x           =  x ** 0.5
---     tan  x           =  sin  x / cos  x
---     tanh x           =  sinh x / cosh x
+instance (Real a, Floating a, Show a) => Floating (ArgEx a) where
+  exp argex = ArgEx (exp w) (jsExp f0)
+    where w = value argex
+          f0 = varFunc argex
+
+  -- log
+  -- sqrt      :: a -> a
+  -- (**),
+  -- logBase
+  -- sin,
+  -- cos,
+  -- tan       :: a -> a
+  -- asin,
+  -- acos,
+  -- atan    :: a -> a
+  -- sinh,
+  -- cosh,
+  -- tanh    :: a -> a
+  -- asinh,
+  -- acosh,
+  -- atanh
+  -- logBase x y      =  log y / log x
+  -- sqrt x           =  x ** 0.5
+  -- tan  x           =  sin  x / cos  x
+  -- tanh x           =  sinh x / cosh x
 
 -- WARNING WARNING WARNING WARNING
 -- DANGEROUS:::: will not consider JS Enviornment Variables

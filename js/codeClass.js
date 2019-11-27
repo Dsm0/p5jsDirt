@@ -15,7 +15,6 @@ class Code{
 
   }
 
-
 // make this function a static class function
   parseCode(code){
     // make sure that when the code is parsed, it's turned into a javascript function

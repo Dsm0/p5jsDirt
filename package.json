@@ -1,10 +1,25 @@
 {
-    "name": "p5jsDirt (framework taken from osc.js-chrome-app)",
-    "version": "0.1",
-    "main": "launch.js",
-    "ignore": [],
-    "dependencies": {
-        "osc": "2.3.0",
-        "p5": "^0.10.2"
-    }
+  "name": "p5jsdirt",
+  "version": "1.0.0",
+  "description": "early stages of a chrome-app interface between p5.js and tidalcycles",
+  "main": "js/launch.js",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "osc": "^2.3.1",
+    "p5": "^0.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dsm0/p5jsDirt.git"
+  },
+  "author": "Will Rinkoff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dsm0/p5jsDirt/issues"
+  },
+  "homepage": "https://github.com/Dsm0/p5jsDirt#readme"
 }

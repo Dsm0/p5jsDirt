@@ -17,7 +17,6 @@ class Thing {
   constructor(paramDict){
     // console.log("in thing constructor")
 
-
     this.startTime = millis();
     this.life = 550;
     this.defaultParams = getDefaultParams();

@@ -10,13 +10,7 @@ import Modules.P5ModuleList
 import P5Render
 import ListWriter
 
-e = element
--- makeConcise :: (Show a, Renderer a) => a -> ListM (P5Func RenderAble)
-pack x = e . RenderAble $ Func x
-
--- point x y = e $ Func $ RenderAble $ Point x y
-
--- line_ :: Shape Double
+pack x = element . RenderAble $ Func x
 
 type ArgExD = ArgEx Double
 type ArgExDList = ArgEx [Double]

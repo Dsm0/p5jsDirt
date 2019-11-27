@@ -23,19 +23,29 @@ import ListWriter
 
 import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
 
-main = putStrLn "hello"
+prettyRender :: (Renderer a) => a -> IO ()
+prettyRender = putStrLn . render
 
-p5Func = toList
-
-func = p5Func $ do
+func = do
   line 2 2 40 500
+  func2 2 3 4
+  listEnumToFunc k
   translate 2 3 4
-  plane 2 3 4 5
+  plane 3 4 5 4
 
-k =[line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
+func2 x y z = do
+  translate x y z
+  translate 20 33 478
+
+k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
+
+-- k = applymatrix
+lx x = [[cos x,          sin x , 0],
+        [negate $ sin x, cos x,  0],
+        [0             ,     0,  1]]
 
 
--- liftM f m = m >>= (\x -> return (f x))
+func3 = do
+  head k
 
-l = ArgEx 2.0 (show 2)
-m = ArgEx 0.0 (show FrameCount)
+main = putStrLn "hi Zuhayar"
