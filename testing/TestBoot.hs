@@ -5,22 +5,17 @@
 
 import Sound.Tidal.Context
 
--- import Sound.Tidal.Pattern
--- import Sound.Tidal.Config
 
 :{
 let p5jsTarget :: OSCTarget
-    p5jsTarget = superdirtTarget {
-                                    oName = "processing",
-                                    oAddress = "127.0.0.1",
-                                    oPort = 57130,
-                                    oLatency = 0.1,
-                                    oTimestamp = MessageStamp
-                                  }
+    p5jsTarget = superdirtTarget {oName = "processing",
+                                oAddress = "127.0.0.1", oPort = 57130,
+                                oLatency = 0.1,
+                                oTimestamp = MessageStamp
+                               }
 :}
 
 import Data.List
-
 -- import qualified Vivid as V
 
 :{
@@ -33,13 +28,7 @@ tidal <- startMulti
          (defaultConfig {cFrameTimespan = 1/20})
 :}
 
--- :{
--- justP5 <- startMulti
---           [superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57131}]
---          (defaultConfig {cFrameTimespan = 1/20})
--- :}
-
-
+import qualified Data.Map.Strict as Map
 
 :{
 let p = streamReplace tidal
@@ -88,14 +77,15 @@ let p = streamReplace tidal
     d14 = p 14
     d15 = p 15
     d16 = p 16
-    pFont = pS "font"
-    pRotate = pF "rotate"
-    testFont = "AkrutiTml2Bold-48.vlw"
-    pX = pF "x"
-    pSize = pF "dispTextSize"
-    pY = pF "y"
-    pXY x y = (pX x # pY y)
+    -- pFont = pS "font"
+    -- pRotate = pF "rotate"
+    -- testFont = "AkrutiTml2Bold-48.vlw"
+    -- pX = pF "x"
+    -- pSize = pF "dispTextSize"
+    -- pY = pF "y"
+    -- pXY x y = (pX x # pY y)
 :}
+
 
 :{
 let setI = streamSetI tidal
@@ -105,9 +95,10 @@ let setI = streamSetI tidal
     setB = streamSetB tidal
 :}
 
+
 :{
     -- FUNCTIONS TO INTERFACE WITH P5DIRT
-let sendFunc x = streamFirst tidal
+let sendFunc = streamFirst tidal
     makeFakeMap x = Map.fromList [("func",VS x)]
     toEvent' ws we ps pe v = Event (Just $ Arc ws we) (Arc ps pe) v
       where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]

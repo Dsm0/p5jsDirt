@@ -1,13 +1,13 @@
 var things = [];
-var funcs = dict();
+var drawFunc = "box(200,200,200)";
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight,WEBGL);
   textSize(40);
   textFont('Georgia',48);
 }
 
-function draw() {
+function olddraw() {
   background(0);
   for (i = things.length - 1;
   // for (i = things.length - 1;
@@ -22,6 +22,11 @@ function draw() {
         things.remove(i);
       }
   }
+}
+
+function draw(){
+  background(0);
+  eval(drawFunc);
 }
 
 function oscEvent(m) {
@@ -44,6 +49,9 @@ function oscEvent(m) {
   if (paramDict['func'] != undefined) {
     // console.log("about to push func");
     // things.push(new Thing(paramDict));
+    console.log("func:");
+    console.log(paramDict['func']);
+    drawFunc = paramDict['func'];
     // console.log("things: " + things);
   } else if(paramDict['s'] != undefined) {
     // console.log("about to push thing")

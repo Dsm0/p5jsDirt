@@ -21,6 +21,8 @@ import Modules.P5Transform
 import Modules.P5ModuleList
 import ListWriter
 
+import Sound.Tidal.Context
+
 import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
 
 prettyRender :: (Renderer a) => a -> IO ()
@@ -36,16 +38,3 @@ func = do
 func2 x y z = do
   translate x y z
   translate 20 33 478
-
-k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
-
--- k = applymatrix
-lx x = [[cos x,          sin x , 0],
-        [negate $ sin x, cos x,  0],
-        [0             ,     0,  1]]
-
-
-func3 = do
-  head k
-
-main = putStrLn "hi Zuhayar"
