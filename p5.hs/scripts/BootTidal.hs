@@ -101,8 +101,8 @@ let sendFunc' = (streamFirst tidal) . makeFunc
     makeFunc x = Pattern $ fakeEvent (makeFakeMap x :: ControlMap)
       where fakeEvent a y = [(toEvent' 0 1 0 1) a]
     draw = sendFunc
-    makeJSVar = var
-    makeTidalParam = tP
+    var = makeJSVar
+    tP = makeTidalParam
 
 :}
 

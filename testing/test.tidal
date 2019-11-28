@@ -59,38 +59,7 @@ let func = do
       box 200 200 200 200 (200)
 
 draw $ do
-  -- line (20*(makeJSVar FrameCount)) 2 40 50
-  -- consoleLog $ (makeTidalParam "cps")
   rotate $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps")
   rotateY $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps") + 20
   rect 00 00 200 200
-resetFunc
-
-
-d1 $ "bd" # cps (100/120)
-
-hush
-
-resetFunc
-
-draw $ do
-  -- consoleLog "message.get(\"cps\").eval()"
-  -- consoleLog $ "message.get(\"cps\")"
-  -- line 2 2 2 2
-:t var
-
-
-resetFunc
-
-hush
-
-in sendFunc func2
-
-resetFunc
-
-prettyRender $ rotate $ (0.5 * (makeJSVar FrameCount))
-
-prettyRender func2
-
-sendFunc func
 resetFunc

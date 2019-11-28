@@ -47,25 +47,4 @@ shearX x = pack (ShearX x :: Transform ArgExD)
 shearY x = pack (ShearY x :: Transform ArgExD)
 translate x y z = pack (Translate x y z :: Transform ArgExD)
 
--- Enviornment Variables ::::::
-frameCount       = makeJSVar FrameCount
-deltaTime        = makeJSVar DeltaTime
-focused          = makeJSVar Focused
-cursor           = makeJSVar Cursor
-frameRate        = makeJSVar FrameRate
-noCursor         = makeJSVar NoCursor
-displayWidth     = makeJSVar DisplayWidth
-displayHeight    = makeJSVar DisplayHeight
-windowWidth      = makeJSVar WindowWidth
-windowHeight     = makeJSVar WindowHeight
-windowResized    = makeJSVar WindowResized
-width            = makeJSVar Width
-height           = makeJSVar Height
-fullscreen       = makeJSVar Fullscreen
-pixelDensity     = makeJSVar PixelDensity
-displayDensity   = makeJSVar DisplayDensity
-getURL           = makeJSVar GetURL
-getURLPath       = makeJSVar GetURLPath
-getURLParams     = makeJSVar GetURLParams
-
 consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)
