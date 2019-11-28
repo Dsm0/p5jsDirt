@@ -7,6 +7,8 @@ import Modules.P5Transform
 import Modules.P5Shapes
 import Modules.P53D
 import Modules.P5ModuleList
+import Modules.DebugFuncs
+import P5Enviornment
 import P5Render
 import ListWriter
 
@@ -36,11 +38,34 @@ torus x y z = pack (Torus x y z :: DDDObject ArgExD)
 
 applymatrix x = pack (ApplyMatrix x :: Transform ArgExDList)
 resetmatrix = pack (ResetMatrix :: Transform ArgExD)
-rotate x = pack (Rotate x :: Transform ArgExD)
 rotateX x = pack (RotateX x :: Transform ArgExD)
+rotate = rotateX
 rotateY x = pack (RotateY x :: Transform ArgExD)
 rotateZ x = pack (RotateZ x :: Transform ArgExD)
 scale x y z = pack (Scale x y z :: Transform ArgExD)
 shearX x = pack (ShearX x :: Transform ArgExD)
 shearY x = pack (ShearY x :: Transform ArgExD)
 translate x y z = pack (Translate x y z :: Transform ArgExD)
+
+-- Enviornment Variables ::::::
+frameCount       = makeJSVar FrameCount
+deltaTime        = makeJSVar DeltaTime
+focused          = makeJSVar Focused
+cursor           = makeJSVar Cursor
+frameRate        = makeJSVar FrameRate
+noCursor         = makeJSVar NoCursor
+displayWidth     = makeJSVar DisplayWidth
+displayHeight    = makeJSVar DisplayHeight
+windowWidth      = makeJSVar WindowWidth
+windowHeight     = makeJSVar WindowHeight
+windowResized    = makeJSVar WindowResized
+width            = makeJSVar Width
+height           = makeJSVar Height
+fullscreen       = makeJSVar Fullscreen
+pixelDensity     = makeJSVar PixelDensity
+displayDensity   = makeJSVar DisplayDensity
+getURL           = makeJSVar GetURL
+getURLPath       = makeJSVar GetURLPath
+getURLParams     = makeJSVar GetURLParams
+
+consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)

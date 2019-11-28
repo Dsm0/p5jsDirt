@@ -7,7 +7,6 @@ import Data.Matrix
 
 data Transform a = ApplyMatrix (ArgEx [[a]])
                  | ResetMatrix
-                 | Rotate (ArgEx a)
                  | RotateX (ArgEx a)
                  | RotateY (ArgEx a)
                  | RotateZ (ArgEx a)

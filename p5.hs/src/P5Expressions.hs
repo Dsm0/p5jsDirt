@@ -18,11 +18,18 @@ instance (Eq a) => Eq (ArgEx a) where
     where (w,z) = (value argex0, value argex1)
           (xf,yf) = (varFunc argex0, varFunc argex1)
 
+
+rationalToFractional x = (map rtf) x
+  where rtf '%' = '/'
+        rtf c = c
+
 instance (Show a) => Show (ArgEx a) where
-  show argex = varFunc argex
+  show argex = (rationalToFractional . varFunc) argex
 
 makeValue a = ArgEx a (show a)
 makeJSVar b = ArgEx 0 (show b)
+tidalParamString x = "message.get(" ++ (show x) ++ ")"
+makeTidalParam a = ArgEx 0 (tidalParamString a)
 
 instance (Show a, Num a) => Num (ArgEx a) where
   negate argex = ArgEx newX (jsMultiply "-1" (f0))

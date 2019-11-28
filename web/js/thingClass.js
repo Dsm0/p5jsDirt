@@ -17,8 +17,8 @@ class Thing {
   constructor(paramDict){
     // console.log("in thing constructor")
 
-    this.startTime = millis();
-    this.life = 550;
+    // this.startTime = millis();
+    // this.life = 550;
     this.defaultParams = getDefaultParams();
     // the default params are for just in case
     // in mose cases, they'll be overwritten

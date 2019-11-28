@@ -1,3 +1,6 @@
+-- :cd "/run/media/will/4028-FD6C/15112/p5jsDirt/p5.hs/src"
+-- :l "main.hs"
+--
 :set -XOverloadedStrings
 :set prompt ""
 :set prompt-cont ""
@@ -15,7 +18,6 @@ let p5jsTarget :: OSCTarget
 :}
 
 import Data.List
--- import qualified Vivid as V
 
 :{
 tidal <- startMulti
@@ -90,12 +92,18 @@ let setI = streamSetI tidal
 
 :{
     -- FUNCTIONS TO INTERFACE WITH P5DIRT
-let sendFunc = streamFirst tidal
+let sendFunc' = (streamFirst tidal) . makeFunc
+    sendFunc = sendFunc' . render
+    resetFunc = sendFunc' ""
     makeFakeMap x = Map.fromList [("func",VS x)]
     toEvent' ws we ps pe v = Event (Just $ Sound.Tidal.Context.Arc ws we) (Sound.Tidal.Context.Arc ps pe) v
       where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
     makeFunc x = Pattern $ fakeEvent (makeFakeMap x :: ControlMap)
       where fakeEvent a y = [(toEvent' 0 1 0 1) a]
+    draw = sendFunc
+    makeJSVar = var
+    makeTidalParam = tP
+
 :}
 
 :set prompt "tidal> "

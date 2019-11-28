@@ -38,3 +38,24 @@ func = do
 func2 x y z = do
   translate x y z
   translate 20 33 478
+
+main = putStrLn "hy"
+
+k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
+
+-- k = applymatrix
+lx x = [[cos x,          sin x , 0],
+        [negate $ sin x, cos x,  0],
+        [0             ,     0,  1]]
+
+
+func3 = do
+  line (20*(makeJSVar FrameCount)) 2 40 50
+  rotate (makeJSVar FrameCount)
+  box 200 200 200 200 (200)
+
+func4 = do
+  line (20*(makeJSVar FrameCount)) 2 40 50
+  rotate (20)
+  box 200 200 200 200 (200)
+  -- plane 3 4 5 4

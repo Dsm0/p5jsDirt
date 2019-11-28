@@ -1,7 +1,6 @@
 d1 $ "bd*4" # pSize 400
 
 
-
 d1 $ "bd*32"
 
 # lpf 200 # hpf
@@ -32,3 +31,66 @@ let pFont = pS "font"
     pSize = pF "dispTextSize"
     pY = pF "y"
     pXY x y = (pX x # pY y)
+
+:script /M/tidalcycles/initTidal/BootTidal.hs
+
+:script ../scripts/BootTidal.hs
+
+:{
+:cd ../src
+:l "main.hs"
+:script ../scripts/BootTidal.hs
+:}
+
+import P5Funcs
+
+:t makeFunc
+
+let sendFunc' = (streamFirst tidal) . makeFunc
+    sendFunc = sendFunc' . render
+    resetFunc = sendFunc' ""
+
+let resetFunc = sendFunc ""
+:t Func
+
+let func = do
+      -- line (20*(makeJSVar FrameCount)) 2 40 50
+      -- rotate (makeTidalParam "cps")
+      box 200 200 200 200 (200)
+
+draw $ do
+  -- line (20*(makeJSVar FrameCount)) 2 40 50
+  -- consoleLog $ (makeTidalParam "cps")
+  rotate $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps")
+  rotateY $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps") + 20
+  rect 00 00 200 200
+resetFunc
+
+
+d1 $ "bd" # cps (100/120)
+
+hush
+
+resetFunc
+
+draw $ do
+  -- consoleLog "message.get(\"cps\").eval()"
+  -- consoleLog $ "message.get(\"cps\")"
+  -- line 2 2 2 2
+:t var
+
+
+resetFunc
+
+hush
+
+in sendFunc func2
+
+resetFunc
+
+prettyRender $ rotate $ (0.5 * (makeJSVar FrameCount))
+
+prettyRender func2
+
+sendFunc func
+resetFunc
