@@ -1,5 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
-module Modules.ExportedFunctions where
+module Exported.ExportedFunctions where
 
 import P5Expressions
 import P5Funcs
@@ -14,8 +14,7 @@ import ListWriter
 
 pack x = element . RenderAble $ Func x
 
-type ArgExD = ArgEx Double
-type ArgExDList = ArgEx [Double]
+
 
 point x y = pack (Point x y :: Shape ArgExD)
 line w x y z = pack (Line w x y z :: Shape ArgExD)

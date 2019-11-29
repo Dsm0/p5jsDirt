@@ -54,12 +54,33 @@ let resetFunc = sendFunc ""
 :t Func
 
 let func = do
-      -- line (20*(makeJSVar FrameCount)) 2 40 50
+      line (20*frameCount) 2 40 50
       -- rotate (makeTidalParam "cps")
       box 200 200 200 200 (200)
+      -- rotate cps'
+
+
+
+render func
+
+
+      :t cps'
+      :t makeJSVar "ok"
+      "ok" - "k"
+
+let speed = 16
+in draw $ do
+    translate 50 50 50
+    line (-200) (-200) 2000 2000
+    torus 100 50 100
+
 
 draw $ do
-  rotate $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps")
-  rotateY $ (makeJSVar frameCount) * 0.025 * (makeTidalParam "cps") + 20
-  rect 00 00 200 200
+  -- rotate $ 0.025 * (makeTidalParam "cps")
+  -- rotateY $ (frameCount * 0.025 * (makeTidalParam "cps") + 20
+  -- rect 00 00 200 200
+
+  :t makeTidalParam "cps"
+
+
 resetFunc

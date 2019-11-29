@@ -13,6 +13,9 @@ class (Show a) => ArgEx_ a where
 data ArgEx a = ArgEx { value :: a ,
                        varFunc :: String}
 
+type ArgExD = ArgEx Double
+type ArgExDList = ArgEx [Double]
+
 instance (Eq a) => Eq (ArgEx a) where
   (==) argex0 argex1 = (w == z) && (xf == yf)
     where (w,z) = (value argex0, value argex1)
@@ -27,6 +30,9 @@ instance (Show a) => Show (ArgEx a) where
   show argex = (rationalToFractional . varFunc) argex
 
 makeValue a = ArgEx a (show a)
+makeJSVar b = ArgEx (0) (show b)
+tidalParamString x = "message.get(" ++ (show x) ++ ")"
+makeTidalParam x = makeJSVar $ tidalParamString x
 
 instance (Show a, Num a) => Num (ArgEx a) where
   negate argex = ArgEx newX (jsMultiply "-1" (f0))
@@ -71,27 +77,56 @@ instance (Real a, Floating a, Show a) => Floating (ArgEx a) where
   exp argex = ArgEx (exp w) (jsExp f0)
     where w = value argex
           f0 = varFunc argex
+  log argex = ArgEx (log w) (jsLog f0)
+    where w = value argex
+          f0 = varFunc argex
+  (**) argex0 argex1 = ArgEx (w ** z) (jsPow f0 f1)
+    where (w,z) = (value argex0, value argex1)
+          (f0,f1) = (varFunc argex0, varFunc argex1)
+  sqrt argex = ArgEx (w ** 0.5) (jsPow f0 "0.5")
+    where w = value argex
+          f0 = varFunc argex
+  logBase argex0 argex1 = ArgEx ((log w) / log z) (jsDivide (jsLog f0) (jsLog f1))
+    where (w,z) = (value argex0, value argex1)
+          (f0,f1) = (varFunc argex0, varFunc argex1)
 
-  -- log
-  -- sqrt      :: a -> a
-  -- (**),
-  -- logBase
-  -- sin,
-  -- cos,
-  -- tan       :: a -> a
-  -- asin,
-  -- acos,
-  -- atan    :: a -> a
-  -- sinh,
-  -- cosh,
-  -- tanh    :: a -> a
-  -- asinh,
-  -- acosh,
-  -- atanh
-  -- logBase x y      =  log y / log x
-  -- sqrt x           =  x ** 0.5
-  -- tan  x           =  sin  x / cos  x
-  -- tanh x           =  sinh x / cosh x
+  sin argex = ArgEx (sin w) (jsSine f0)
+    where w = value argex
+          f0 = varFunc argex
+  cos argex = ArgEx (cos w) (jsCosine f0)
+    where w = value argex
+          f0 = varFunc argex
+  tan argex = ArgEx (tan w) (jsTan f0)
+    where w = value argex
+          f0 = varFunc argex
+  asin argex = ArgEx (asin w) (jsASine f0)
+    where w = value argex
+          f0 = varFunc argex
+  acos argex = ArgEx (acos w) (jsACosine f0)
+    where w = value argex
+          f0 = varFunc argex
+  atan argex = ArgEx (atan w) (jsATan f0)
+    where w = value argex
+          f0 = varFunc argex
+  sinh argex = ArgEx (sinh w) (jsSineh f0)
+    where w = value argex
+          f0 = varFunc argex
+  cosh argex = ArgEx (cosh w) (jsCosineh f0)
+    where w = value argex
+          f0 = varFunc argex
+  tanh argex = ArgEx (tanh w) (jsTanh f0)
+    where w = value argex
+          f0 = varFunc argex
+  asinh argex = ArgEx (sinh w) (jsASineh f0)
+    where w = value argex
+          f0 = varFunc argex
+  acosh argex = ArgEx (acosh w) (jsACosineh f0)
+    where w = value argex
+          f0 = varFunc argex
+  atanh argex = ArgEx (atanh w) (jsATanh f0)
+    where w = value argex
+          f0 = varFunc argex
+
 
 -- WARNING WARNING WARNING WARNING
 -- DANGEROUS:::: will not consider JS Enviornment Variables

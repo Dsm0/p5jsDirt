@@ -16,7 +16,7 @@ import P5Expressions
 import P5Render
 import P5JSRenderFuncs
 import P5Funcs
-import Modules.ExportedFunctions
+-- import Modules.ExportedFunctions
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
 import Modules.P5Transform

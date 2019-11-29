@@ -1,6 +1,5 @@
 module P5JSRenderFuncs where
 
-
 bracket x = "(" ++ x ++ ")"
 
 jsAdd x y = bracket $ x ++ " + " ++ y
@@ -19,24 +18,21 @@ jsLog x = bracket ("Math.log" ++ bracket x)
 jsPow x y = bracket ("Math.pow" ++ bracket (bx ++ "," ++ by))
   where bx = bracket x
         by = bracket y
-jsSqrt x = jsPow x "0.5"        
 
-  -- sqrt      :: a -> a
-  -- (**),
-  -- logBase
-  -- sin,
-  -- cos,
-  -- tan       :: a -> a
-  -- asin,
-  -- acos,
-  -- atan    :: a -> a
-  -- sinh,
-  -- cosh,
-  -- tanh    :: a -> a
-  -- asinh,
-  -- acosh,
-  -- atanh
-  -- logBase x y      =  log y / log x
-  -- sqrt x           =  x ** 0.5
-  -- tan  x           =  sin  x / cos  x
-  -- tanh x           =  sinh x / cosh x
+jsSqrt x = jsPow x "0.5"
+
+jsSine x = bracket ("Math.sin" ++ bracket x)
+jsCosine x = bracket ("Math.cos" ++ bracket x)
+jsTan x = bracket ("Math.tan" ++ bracket x)
+
+jsASine x = bracket ("Math.asin" ++ bracket x)
+jsACosine x = bracket ("Math.acos" ++ bracket x)
+jsATan x = bracket ("Math.atan" ++ bracket x)
+
+jsSineh x = bracket ("Math.sinh" ++ bracket x)
+jsCosineh x = bracket ("Math.cosh" ++ bracket x)
+jsTanh x = bracket ("Math.tanh" ++ bracket x)
+
+jsASineh x = bracket ("Math.asinh" ++ bracket x)
+jsACosineh x = bracket ("Math.acosh" ++ bracket x)
+jsATanh x = bracket ("Math.atanh" ++ bracket x)

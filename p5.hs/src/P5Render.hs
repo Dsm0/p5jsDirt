@@ -21,7 +21,6 @@ instance Eq (RenderAble) where
   (==) a b = show a == show b
     -- where strip = (map removePunc . lines . render)
 
-
 instance Renderer Int where
   render a = show a
 instance Renderer Float where
