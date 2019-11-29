@@ -1,7 +1,6 @@
 d1 $ "bd*4" # pSize 400
 
 
-
 d1 $ "bd*32"
 
 # lpf 200 # hpf
@@ -32,3 +31,56 @@ let pFont = pS "font"
     pSize = pF "dispTextSize"
     pY = pF "y"
     pXY x y = (pX x # pY y)
+
+:script /M/tidalcycles/initTidal/BootTidal.hs
+
+:script ../scripts/BootTidal.hs
+
+:{
+:cd ../src
+:l "main.hs"
+:script ../scripts/BootTidal.hs
+:}
+
+import P5Funcs
+
+:t makeFunc
+
+let sendFunc' = (streamFirst tidal) . makeFunc
+    sendFunc = sendFunc' . render
+    resetFunc = sendFunc' ""
+
+let resetFunc = sendFunc ""
+:t Func
+
+let func = do
+      line (20*frameCount) 2 40 50
+      -- rotate (makeTidalParam "cps")
+      box 200 200 200 200 (200)
+      -- rotate cps'
+
+
+
+render func
+
+
+      :t cps'
+      :t makeJSVar "ok"
+      "ok" - "k"
+
+let speed = 16
+in draw $ do
+    translate 50 50 50
+    line (-200) (-200) 2000 2000
+    torus 100 50 100
+
+
+draw $ do
+  -- rotate $ 0.025 * (makeTidalParam "cps")
+  -- rotateY $ (frameCount * 0.025 * (makeTidalParam "cps") + 20
+  -- rect 00 00 200 200
+
+  :t makeTidalParam "cps"
+
+
+resetFunc

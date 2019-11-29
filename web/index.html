@@ -12,15 +12,18 @@
     <pre id="message"></pre>
 </div> -->
 <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/p5/lib/p5.min.js"></script>
-<script src="../node_modules/p5/lib/p5.dom.min.js"></script>
-<script src="../node_modules/osc/dist/osc-chromeapp.min.js"></script>
-<script src="../node_modules/osc/dist/osc-chromeapp.min.js"></script>
+<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="../js/modules/jquery.min.js"></script>
+<script src="../js/modules/p5.min.js"></script>
+<script src="../js/modules/osc-browser.min.js"></script>
 <script src="../js/remove.js"></script>
-<script src="../js/superDirt.js"></script>
+<script src="../js/socketInterface.js"></script>
 <script src="../js/thingClass.js"></script>
-<script src="../js/app.js"></script>
+<script src="../js/superDirt.js"></script>
+<script>
+  var socketIO = new socketIO.SocketWebOsc();
+</script>
+<!-- <script src="../js/app.js"></script> -->
   <!-- <head>
     <title>My Sketch</title>
     <script src="../js/superDirt.js"></script>

@@ -3,10 +3,24 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    cabal-file:
+      size: 3655
+      sha256: 84c153e926b87b86661798bf01848015e2bc672ab066def66410248caf24aaa5
+    name: tidal
+    version: 1.4.5
+    git: https://github.com/tidalcycles/Tidal.git
+    pantry-tree:
+      size: 10124
+      sha256: 66ec60e656ba5df6a016479c5cefbfef7119974baad0a0b743fe3cdf9b80431e
+    commit: a6531308bacd072928089f64127185c59e931271
+  original:
+    git: https://github.com/tidalcycles/Tidal.git
+    commit: a6531308bacd072928089f64127185c59e931271
 snapshots:
 - completed:
-    size: 525662
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/15.yaml
-    sha256: c5e673e5723931b64ef2eb5004f6d9ea3c95b58d48388dbc4de6f66b97c81f7a
-  original: lts-14.15
+    size: 524804
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/16.yaml
+    sha256: 4d1519a4372d051d47a5eae2241cf3fb54e113d7475f89707ddb6ec06add2888
+  original: lts-14.16

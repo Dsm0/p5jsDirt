@@ -20,7 +20,6 @@ data JSVar =
                           | GetURL
                           | GetURLPath
                           | GetURLParams
-                          -- | EnvVarComposition a
 
 instance Show JSVar where
   show FrameCount       =    "frameCount"

@@ -16,10 +16,14 @@ import P5Expressions
 import P5Render
 import P5JSRenderFuncs
 import P5Funcs
-import Modules.ExportedFunctions
+-- import Modules.ExportedFunctions
+import Exported.ExportedFunctions
+import Exported.ExportedVariables
 import Modules.P5Transform
 import Modules.P5ModuleList
 import ListWriter
+
+import Sound.Tidal.Context
 
 import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
 
@@ -37,6 +41,8 @@ func2 x y z = do
   translate x y z
   translate 20 33 478
 
+main = putStrLn "hy"
+
 k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
 
 -- k = applymatrix
@@ -46,6 +52,12 @@ lx x = [[cos x,          sin x , 0],
 
 
 func3 = do
-  head k
+  line (20*(makeJSVar FrameCount)) 2 40 50
+  rotate (makeJSVar FrameCount)
+  box 200 200 200 200 (200)
 
-main = putStrLn "hi Zuhayar"
+func4 = do
+  line (20*(makeJSVar FrameCount)) 2 40 50
+  rotate (20)
+  box 200 200 200 200 (200)
+  -- plane 3 4 5 4

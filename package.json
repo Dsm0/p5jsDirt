@@ -1,11 +1,14 @@
 {
   "name": "p5jsdirt",
   "version": "1.0.0",
-  "description": "early stages of a chrome-app interface between p5.js and tidalcycles",
-  "main": "js/launch.js",
+  "description": "early version of tidalcycles-p5js interface",
+  "main": "index.js",
   "dependencies": {
     "jquery": "^3.4.1",
-    "osc": "^2.3.1",
+    "osc": "2.3.0",
+    "express": "4.16.4",
+    "socket.io": "^2.3.0",
+    "ws": "7.0.0",
     "p5": "^0.10.2"
   },
   "devDependencies": {},

@@ -1,5 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
-module Modules.ExportedFunctions where
+module Exported.ExportedFunctions where
 
 import P5Expressions
 import P5Funcs
@@ -7,13 +7,14 @@ import Modules.P5Transform
 import Modules.P5Shapes
 import Modules.P53D
 import Modules.P5ModuleList
+import Modules.DebugFuncs
+import P5Enviornment
 import P5Render
 import ListWriter
 
 pack x = element . RenderAble $ Func x
 
-type ArgExD = ArgEx Double
-type ArgExDList = ArgEx [Double]
+
 
 point x y = pack (Point x y :: Shape ArgExD)
 line w x y z = pack (Line w x y z :: Shape ArgExD)
@@ -36,11 +37,13 @@ torus x y z = pack (Torus x y z :: DDDObject ArgExD)
 
 applymatrix x = pack (ApplyMatrix x :: Transform ArgExDList)
 resetmatrix = pack (ResetMatrix :: Transform ArgExD)
-rotate x = pack (Rotate x :: Transform ArgExD)
 rotateX x = pack (RotateX x :: Transform ArgExD)
+rotate = rotateX
 rotateY x = pack (RotateY x :: Transform ArgExD)
 rotateZ x = pack (RotateZ x :: Transform ArgExD)
 scale x y z = pack (Scale x y z :: Transform ArgExD)
 shearX x = pack (ShearX x :: Transform ArgExD)
 shearY x = pack (ShearY x :: Transform ArgExD)
 translate x y z = pack (Translate x y z :: Transform ArgExD)
+
+consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)
