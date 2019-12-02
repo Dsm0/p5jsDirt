@@ -5,7 +5,9 @@ var lastDrawFunc = "box(200,200,200)";
 function setup() {
   createCanvas(windowWidth, windowHeight,WEBGL);
   textSize(40);
-  textFont('Georgia',48);
+  rockSalt = loadFont("fonts/RockSalt.ttf");
+  textFont(rockSalt,48);
+  // textFont('Georgia',48);
 }
 
 function olddraw() {

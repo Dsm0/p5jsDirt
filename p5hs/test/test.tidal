@@ -43,7 +43,6 @@ in draw $ do
   rotateZ (200)
   listEnumToFunc (take 20 $ cycle [b2])
 
-
 let spd = 0.5
     cn x= (200*) $ sin $ (0.05 * ) (spd*frameCount + x)
     bbox x = do
@@ -69,8 +68,9 @@ in draw $ do
   listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..50]]
   -- listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..20]]
 
-reset
-
+import ExportedFunctions
+:list ExportedFunctions
+:browse
 
 let pat = "[0 5 0 5 <8 8 8 8 8 8 8 3*3> 0 5 0]"
 in do
@@ -79,6 +79,34 @@ in do
       # distort 0.1
 
 let be
+
+let spd = 0.0125
+    hey y offset = do
+              push
+              translate 0 y (-50)
+              objScale (abs $ ((10 *)) $ sin (frameCount * 0.000005)) blank blank
+              rotateX (90)
+              rotateY ((frameCount * spd) + offset)
+              -- text (makeJSVar "absolutely disgusting tp3") 0 0 blank blank
+              text (makeJSVar "tp3") 0 0 blank blank
+              pop
+in draw $ do
+  translate (-2000) (500) (-2000)
+  rotateX (3.14159265)
+  -- listEnumToFunc [hey (x*200) (x/(sin $ (frameCount * 0.005))) | x <- map makeValue [-5..20]]
+  listEnumToFunc [hey (x*200) (x/8) | x <- map makeValue [-5..20]]
+  translate (2000) (000) (000)
+  rotateY (180)
+  rotateX (3.14159265)
+  -- listEnumToFunc [hey (x*200) (x/(sin $ (frameCount * 0.005))) | x <- map makeValue [-5..20]]
+  listEnumToFunc [hey (x*200) (x/8) | x <- map makeValue [-10..10]]
+
+
+
+draw $ do
+  text (makeJSVar "absolutely disgusting tp3") 0 0 blank blank
+
+  :t text
 
 let k x = do
         listEnumToFunc [genRect (x/9) | x <- map makeValue [0..9]]

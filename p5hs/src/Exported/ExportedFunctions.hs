@@ -11,6 +11,7 @@ import Modules.P5Color
 import Modules.DebugFuncs
 import Modules.P5Structure
 import Modules.P5Setting
+import Modules.P5Text
 
 import P5Enviornment
 import P5Render
@@ -43,7 +44,7 @@ rotateX x = pack (RotateX x :: Transform ArgExD)
 rotate = rotateX
 rotateY x = pack (RotateY x :: Transform ArgExD)
 rotateZ x = pack (RotateZ x :: Transform ArgExD)
-scale x y z = pack (Scale x y z :: Transform ArgExD)
+objScale x y z = pack (Scale x y z :: Transform ArgExD)
 shearX x = pack (ShearX x :: Transform ArgExD)
 shearY x = pack (ShearY x :: Transform ArgExD)
 translate x y z = pack (Translate x y z :: Transform ArgExD)
@@ -68,6 +69,17 @@ stroke x y z = pack (Stroke x y z :: Setting ArgExD)
 noStroke = pack (NoStroke :: Setting ArgExD)
 erase x y = pack (Erase x y :: Setting ArgExD)
 noErase x = pack (NoErase :: Setting ArgExD)
+
+
+textAlign x = pack (TextAlign x :: P5Text ArgExD)
+textLeading x = pack (TextLeading x :: P5Text ArgExD)
+textSize x = pack (TextSize x :: P5Text ArgExD)
+textStyle x = pack (TextStyle x :: P5Text ArgExD)
+textWidth x = pack (TextWidth x :: P5Text ArgExD)
+textAscent = pack (TextAscent :: P5Text ArgExD)
+textDescent = pack (TextDescent :: P5Text ArgExD)
+text w x y z a = pack (Text w x y z a :: P5Text ArgExD)
+textFont x = pack (TextFont x :: P5Text ArgExD)
 
 consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)
 
