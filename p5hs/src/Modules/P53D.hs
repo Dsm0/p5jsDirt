@@ -13,6 +13,8 @@ data DDDObject a
            | Cylinder (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a)
            | Cone (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a)
            | Ellipsoid (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a)
+           -- | Triangle (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a)
+           -- | Arc (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a) (ArgEx a)
            | Torus (ArgEx a) (ArgEx a) (ArgEx a) -- X X N mberOfSides
            deriving(Eq,Show)
 
@@ -40,11 +42,3 @@ instance (Show a, Renderer a) => Renderer (DDDObject a) where
 -- torus([radius], [tubeRadius], [detailX], [detailY])
   render (Torus x y z) = "torus(" ++ args ++ ");"
     where args = betweenBrackets [x,y,z]
-  -- render (Triangle w x y z a b) = "triangle(" ++ args ++ ");"
-  --   where args = betweenBrackets [w,x,y,z,a,b]
-  -- render (Arc w x y z start stop) = "arc(" ++ args ++ ");"
-  --   where args = betweenBrackets [w,x,y,z,start,stop]
-  -- render (NGon x y r) = "ellipse(" ++ args ++ ");"
-  --   where args = betweenBrackets [x,y,r] -- ++ "," ++ (show r)
-  -- render (CustomShape xys) = foldr (\xy xys-> "vertex(" ++ (args xy) ++ "); \n" ++ xys) "" xys
-  --   where args (x,y) = (show x) ++ "," ++ (show y)

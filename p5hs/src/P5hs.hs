@@ -12,6 +12,10 @@ import Data.Typeable
 import Data.List.Split
 
 import Modules.P5Shapes
+import Modules.P5Color
+import Modules.P53D
+import Modules.P5Transform
+
 import P5Enviornment
 import P5Expressions
 import P5Render
@@ -21,9 +25,8 @@ import qualified Data.Map as Map_
 -- import Modules.ExportedFunctions
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
-import Modules.P5Transform
-import Modules.P5ModuleList
 import ListWriter
+
 
 import Sound.Tidal.Context
 

@@ -17,7 +17,6 @@ d1 $ "bd*32"  # gain 2
 d2 $ "hc*4"
 # hpf 200
 
-
 let pFont = pS "font"
     pRotate = pF "rotate"
     testFont = "AkrutiTml2Bold-48.vlw"

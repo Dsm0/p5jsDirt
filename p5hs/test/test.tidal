@@ -2,25 +2,33 @@
 :script scripts/BootTidal.hs
 :}
 
+:browse Modules.P5Color
+import P5Expressions
+import P5Render
+
+render $ LerpColor (Color 2 2 2) (Color 2 2 3) (makeValue 0.3)
+
+render $ do
+  push
 -- demo1: boxtrain
 
 let boxtrain = do {
       let fcConstant = (frameCount/5)
-          spd = (sin (fcConstant*0.00000000016))
+          spd = (sin (fcConstant*0.00016))
           xshift = (sin (fcConstant*0.0001))*2
           box' x = do
             -- line (20*fcConstant) 2 40 500
             rotateY $ (fcConstant * x)*0.0001
             -- rotate (makeTidalParam "cps")
             rotate $ (fcConstant ** 2 * x)*0.000005
-            rotateZ $ (fcConstant * x)*0.00001
+            rotateZ $ (fcConstant * x)*0.0001
             rotateX $ (fcConstant * x)*0.001
-            translate xshift (90) blank
+            translate xshift (90 * (x**2)) blank
             -- translate (xshift/8) ((2 *) $ sin (fcConstant*0.0005)) blank
             -- rect 200 0 200 200
             box 200 0 200 200 blank
             circle 0 ((frameCount**0.3 + frameCount*0.2)/200) 100
-            -- torus 200 20 200
+            torus 200 20 (x**2)
         -- rotate cps'
           boxes = [box' x | x <- fmap makeValue [1..3]]
       in listEnumToFunc boxes }
@@ -30,10 +38,38 @@ let boxtrain = do {
       translate (-200) (30) 100
       rotateZ 20
 in draw $ do
-  translate (500) (-00) (-800)
-  rotateX (200)
+  translate (500) (-200) (-2000)
+  rotateX (2000)
   rotateZ (200)
-  listEnumToFunc (take 8 $ cycle [b2])
+  listEnumToFunc (take 20 $ cycle [b2])
+
+
+let spd = 0.5
+    cn x= (200*) $ sin $ (0.05 * ) (spd*frameCount + x)
+    bbox x = do
+            translate 200 200 200
+            fill (255 * (x/25)) (255 * (x/55)) (255 * (x/95))
+            rect (cn x) (cn x) (negate $ cn x) (cn x)
+            -- triangle (cn x) (cn x) (cn x) (cn x) (cn x) (cn x)
+    bbbox x = do
+      push
+      translate (-120) (-160) (-200)
+      bbox x
+      pop
+in draw $ do
+  translate (-30) (-15) 0
+  rotateX (frameCount*spd*0.01)
+  push
+  fill 0 255 255
+  listEnumToFunc [box (x**2) (x*5 - 20) (x*5 +200) (x**2) blank| x <- map makeValue [0..20]]
+  pop
+  translate (0.01) 0 0
+  rotateX (0.01)
+  -- rotateX (180)
+  listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..50]]
+  -- listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..20]]
+
+reset
 
 
 let pat = "[0 5 0 5 <8 8 8 8 8 8 8 3*3> 0 5 0]"
@@ -43,27 +79,17 @@ in do
       # distort 0.1
 
 let be
-begin' = makeTidalParam "begin"
 
 let k x = do
-        translate x 0 0
-        translate (-900 + 50) (000) blank
         listEnumToFunc [genRect (x/9) | x <- map makeValue [0..9]]
+    genRect dx = do
+      translate (20 * cont) (20*cont) (200 * cont)
+      rect 20 20 20 (20)
+        where cont = dx
 in draw $ do
-  k 200
-  k 23
-  -- k 4
-  -- k 4
-  -- k 6
-  -- k 8
-  -- -- consoleLog $ (2 * gain')
-  -- -- rect 20 20 20 (20)
-  -- translate (-900) (000) blank
-  -- listEnumToFunc [genRect (x/9) | x <- map makeValue [0..9]]
-  -- -- genRect
+  k (90)
 
 
-genRect dx = do
-  translate (200 * cont) (20*cont) (200 * cont)
-  rect 20 20 20 (20)
-    where cont = begin' + dx
+draw $ do {rect 20 20 20 ((200*) $ sin (frameCount*0.003))}
+
+:t draw

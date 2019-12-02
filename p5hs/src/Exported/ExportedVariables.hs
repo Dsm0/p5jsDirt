@@ -7,7 +7,6 @@ import P5Enviornment
 
 -- Enviornment Variables ::::::
 
-
 frameCount       = makeJSVar FrameCount :: ArgEx ArgExD
 deltaTime        = makeJSVar DeltaTime  :: ArgEx ArgExD
 focused          = makeJSVar Focused  :: ArgEx ArgExD
@@ -28,8 +27,11 @@ getURL           = makeJSVar GetURL  :: ArgEx ArgExD
 getURLPath       = makeJSVar GetURLPath  :: ArgEx ArgExD
 getURLParams     = makeJSVar GetURLParams  :: ArgEx ArgExD
 
+
 blank            = makeJSVar Blank :: ArgEx ArgExD
 undefined'       = blank
+
+
 
 -- tidal Params
 -- they all end with ' as to not overwrite the definitions used by tidalcycles
@@ -40,7 +42,7 @@ delta' = makeTidalParam "delta" :: ArgEx ArgExD
 cycle' = makeTidalParam "cycle" :: ArgEx ArgExD
 gain' = makeTidalParam "gain" :: ArgEx ArgExD
 pan' = makeTidalParam "pan" :: ArgEx ArgExD
-
+begin' = makeTidalParam "begin" :: ArgEx ArgExD
 -- these are just some paramaters included in
 -- nearly every tidal osc messag
 

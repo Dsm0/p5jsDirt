@@ -4,14 +4,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveFunctor #-}
 
--- module Lib
---    ( someFunc
---    ) where
-
--- someFunc :: IO ()
--- someFunc = putStrLn "someFunc"
---
-module Lib where
+module P5lib where
 
 import Data.List
 import Text.Printf
@@ -19,6 +12,13 @@ import Data.Typeable
 import Data.List.Split
 
 import Modules.P5Shapes
+import Modules.P5Structure
+import Modules.P53D
+import Modules.P5Color
+import Modules.P5Transform
+import Modules.P5Setting
+import Modules.DebugFuncs
+
 import P5Enviornment
 import P5Expressions
 import P5Render
@@ -28,8 +28,7 @@ import qualified Data.Map as Map_
 -- import Modules.ExportedFunctions
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
-import Modules.P5Transform
-import Modules.P5ModuleList
+-- import Modules.P5ModuleList
 import ListWriter
 
 import Sound.Tidal.Context

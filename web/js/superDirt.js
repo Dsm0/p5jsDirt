@@ -60,7 +60,7 @@ function oscEvent(m) {
 
   switch(paramDict['func']) {
     case "":
-    drawFunc = paramDict['func'];
+    drawFunc = "";
     // console.log("things: " + things);
       break;
     case undefined:
