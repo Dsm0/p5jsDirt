@@ -4,7 +4,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveFunctor #-}
 
-module Main where
+module OldMain where
 
 import Data.List
 import Text.Printf
@@ -43,7 +43,7 @@ func2 x y z = do
   translate x y z
   translate 20 33 478
 
-main = putStrLn "hy"
+oldmain = putStrLn "hy"
 
 k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
 

@@ -38,6 +38,8 @@ s' = makeTidalParam "s" :: ArgEx ArgExD
 orbit' = makeTidalParam "orbit" :: ArgEx ArgExD
 delta' = makeTidalParam "delta" :: ArgEx ArgExD
 cycle' = makeTidalParam "cycle" :: ArgEx ArgExD
+gain' = makeTidalParam "gain" :: ArgEx ArgExD
+pan' = makeTidalParam "pan" :: ArgEx ArgExD
 
 -- these are just some paramaters included in
 -- nearly every tidal osc messag

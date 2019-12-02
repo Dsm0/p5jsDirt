@@ -31,9 +31,10 @@ instance (Show a) => Show (ArgEx a) where
 
 makeValue a = ArgEx a (show a)
 makeJSVar b = ArgEx (0) (show b)
+makeJSVar' b = ArgEx (0) (b)
 tidalParamString x = "message.get(" ++ (show x) ++ ")"
 makeTidalParam :: (Num a1, Show a2) => a2 -> ArgEx a1
-makeTidalParam x = makeJSVar $ tidalParamString x
+makeTidalParam x = makeJSVar' $ tidalParamString x
 
 instance (Show a, Num a) => Num (ArgEx a) where
   negate argex = ArgEx newX (jsMultiply "-1" (f0))
@@ -157,6 +158,11 @@ instance (Ord a) => Ord (ArgEx a) where
 
 instance (Ord a, Show a, Real a) => Real (ArgEx a) where
   toRational argex = toRational (value argex)
+
+-- instance (Real a) => Integral (ArgEx a) where
+--   quot argex0 argex1 = ArgEx (quot w z) ()
+--     where (w,z) = (value argex0, value argex1)
+--           (f0,f1) = (varFunc argex0, varFunc argex1)
 
 
 -- instance (Ord a, Show a, Real a) => Real (ArgEx a) where

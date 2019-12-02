@@ -5,7 +5,7 @@
 :set prompt ""
 :set prompt-cont ""
 -- :set -XDataKinds
-
+import Lib
 import Sound.Tidal.Context
 import qualified Data.Map as Map_
 
@@ -23,9 +23,9 @@ import Data.List
 :{
 tidal <- startMulti
           [
-          -- superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
-          --   ,
-            p5jsTarget
+          superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
+            -- ,
+            -- p5jsTarget
               ]
          (defaultConfig {cFrameTimespan = 1/20})
 :}

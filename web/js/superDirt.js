@@ -1,5 +1,6 @@
 var messages = [new Thing({})];
 var drawFunc = "box(200,200,200)";
+var lastDrawFunc = "box(200,200,200)";
 
 function setup() {
   createCanvas(windowWidth, windowHeight,WEBGL);
@@ -24,17 +25,23 @@ function olddraw() {
   }
 }
 
+// function parseFuncMessage(funcSlice){
+// }
+
+
 function draw(){
   background(0);
   var message = messages[messages.length - 1];
-  if(message == undefined){
-    console.log("message is undefined")
-  } else {
-    console.log("message: " + message);
+  try {
+    eval(drawFunc);
+  }catch(err) {
+    eval(lastDrawFunc);
+    console.log("drawFunc");
+    console.log(drawFunc);
+    console.log(err);
   }
   // print(message.get("orbit"))
   // for use with p5.hs draw functions that call tidal params
-  eval(drawFunc);
 }
 
 function oscEvent(m) {
@@ -50,18 +57,19 @@ function oscEvent(m) {
     paramDict[param] = paramValue;
     ++i; // it actually only looks at every other value, b/c there are 2 ++i's
   };
-  // things.push("1")
-  // console.log("params Parsed");
-  // console.log(paramDict['s']);
 
-  if (paramDict['func'] != undefined) {
-    // console.log("about to push func");
-    // things.push(new Thing(paramDict));
-    console.log("func:");
-    console.log(paramDict['func']);
+  switch(paramDict['func']) {
+    case "":
     drawFunc = paramDict['func'];
     // console.log("things: " + things);
-  } else if(paramDict['s'] != undefined) {
+      break;
+    case undefined:
+      break;
+    default:
+      // lastDrawFunc = "box(200,200,200)";
+      drawFunc = paramDict['func'];
+  }
+  if(paramDict['s'] != undefined) {
     // console.log("about to push thing")
     messages.push(new Thing(paramDict));
     // console.log("things: " + things);
