@@ -28,19 +28,31 @@ source-repository head
 library
   exposed-modules:
       Lib
+
+      Data.List
+      Text.Printf
+      Data.Typeable
+      Data.List.Split
+      Modules.P5Transform
+      Modules.P5Shapes
+      Modules.P53D
+      Modules.P5Color
+      Modules.DebugFuncs
+      Modules.P5Structure
+      Modules.P5Setting
+      Modules.P5Text
+      Modules.P5Image
+
+      P5Enviornment
+      P5FunctionSend
+      P5Expressions
+      P5Render
+      P5JSRenderFuncs
+      P5Funcs
+      qualified Data.Map as Map_
       Exported.ExportedFunctions
       Exported.ExportedVariables
       ListWriter
-      Modules.DebugFuncs
-      Modules.P53D
-      Modules.P5ModuleList
-      Modules.P5Shapes
-      Modules.P5Transform
-      P5Enviornment
-      P5Expressions
-      P5Funcs
-      P5JSRenderFuncs
-      P5Render
 
 
   other-modules:
