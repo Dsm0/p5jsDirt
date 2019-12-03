@@ -8,10 +8,14 @@ function getDefaultParams(){
   "lpf" : 10000,
   "rotate" : 0,
   "orbit" : 0,
+  "pan" : 0.5,
   "font" : "Georgia"
   }
   return(dict)
 }
+
+var lastFrom = {};
+
 
 class Thing {
   constructor(paramDict){
@@ -23,6 +27,7 @@ class Thing {
     // the default params are for just in case
     // in mose cases, they'll be overwritten
     this.paramDict = paramDict;
+    this.lastFrom = "";
 
     console.log(this.paramDict);
   };
@@ -43,6 +48,23 @@ class Thing {
         }
 
   }
+
+  getFrom(fromParam,paramToMatch,paramToSet){
+    try {
+          if((this.paramDict[fromParam] == paramToMatch) && paramToSet in this.paramDict){
+          lastFrom[[fromParam,paramToMatch,paramToSet]] = this.paramDict[paramToSet];
+          return(this.paramDict[paramToSet])
+            }else{
+          return(lastFrom[[fromParam,paramToMatch,paramToSet]])
+        };
+        }
+        catch(err) {
+          console.log("ERROR:: a parameter: " + paramToSet + " might not exist");
+          console.log("official message:")
+          console.log(err.message);
+        }
+  }
+
 
   alive () {
     return((this.startTime+this.life) >= millis());

@@ -12,6 +12,7 @@ import Modules.DebugFuncs
 import Modules.P5Structure
 import Modules.P5Setting
 import Modules.P5Text
+import Modules.P5Image
 
 import P5Enviornment
 import P5Render
@@ -38,7 +39,7 @@ cone w x y z a b = pack (Cone  w x y z a b :: DDDObject ArgExD)
 ellipsoid w x y z a b c d = pack (Ellipsoid  w x y z a b c d :: DDDObject ArgExD)
 torus x y z = pack (Torus x y z :: DDDObject ArgExD)
 
-applymatrix x = pack (ApplyMatrix x :: Transform ArgExDList)
+applymatrix x = pack (ApplyMatrix x :: Transform ArgExD)
 resetmatrix = pack (ResetMatrix :: Transform ArgExD)
 rotateX x = pack (RotateX x :: Transform ArgExD)
 rotate = rotateX
@@ -81,8 +82,10 @@ textDescent = pack (TextDescent :: P5Text ArgExD)
 text w x y z a = pack (Text w x y z a :: P5Text ArgExD)
 textFont x = pack (TextFont x :: P5Text ArgExD)
 
-consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)
+-- createImage x = CreateImg (makeJSVar x) :: Image ArgExD
+image x y z a b = pack (Image (makeJSVar x) y z a b :: Image ArgExD)
 
+consoleLog x = pack (ConsoleLog (makeJSVar x) :: Debug ArgExD)
 
 push             = pack (Push :: Structure)
 pop              = pack (Pop :: Structure)

@@ -58,19 +58,81 @@ let spd = 0.5
 in draw $ do
   translate (-30) (-15) 0
   rotateX (frameCount*spd*0.01)
-  push
-  fill 0 255 255
-  listEnumToFunc [box (x**2) (x*5 - 20) (x*5 +200) (x**2) blank| x <- map makeValue [0..20]]
-  pop
+  -- push
+  -- fill 0 255 255
+  -- listEnumToFunc [box (x**2) (x*5 - 20) (x*5 +200) (x**2) blank| x <- map makeValue [0..20]]
+  -- pop
   translate (0.01) 0 0
   rotateX (0.01)
   -- rotateX (180)
   listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..50]]
   -- listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..20]]
 
+mat = [[[1.0],[0.0],[0.0]],[[0.0],[1.0],[0.0]],[[0.0],[0.0],[1.0]]]
+mat = [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]]
+:set prompt ">"
+:info ArgExDList
+mat' = map (map sin) mat
+mat'
+
+putStrLn $ render mat
+
+:t draw
+
+render $ applymatrix $ makeValue mat
+l = (mat :: [[Double]])
+
+render $
+
+imac = "https://i2.wp.com/512pixels.net/wp-content/uploads/S3/2012-12-13-bondi-blue.jpeg?w=640"
+createImg imac
+
+image imac
+
+draw $ do
+  pack (makeJSVar "")
+
+draw $ do
+  image imac 0 0 0 0
+
+
+import Modules.P5Image
+removePunc $ varFunc $ makeJSVar imac
+:list removePunc
+
+
+render $ applymatrix $ makeValue [[1,0,0],[0,1,0],[0,0,1]]
+
+draw $ do
+  applymatrix $ makeValue [[8,0,0],[1/((200 *) $ sin $ makeJSVar (frameCount*0.01)),1,0],[0.8,0,1]]
+  rect 100 100 (-100) (-100)
+
+
+concat $ concat mat
+
+import Modules.P5Transform
+ApplyMatrix mat
+
+
 import ExportedFunctions
 :list ExportedFunctions
 :browse
+
+
+
+
+d2 $ "bd" # orbit 0
+
+bdOnly = makeTidalParamFor "s" "bd" "gain"
+
+d1 $ "bd sd" # gain "<1 2>"
+
+draw $ do
+  rect 200 200 200 (200 * bdOnly)
+
+draw $ do
+  pack (makeJSVar "")
+
 
 let pat = "[0 5 0 5 <8 8 8 8 8 8 8 3*3> 0 5 0]"
 in do
@@ -103,6 +165,32 @@ in draw $ do
 
 
 
+do
+  hush
+  -- d1 $ linger 0.5 $ (iter 4) $ n ((run 16) + "< 0 2 3 4 5 >")  # "yeah" # gain 1 # cut "-1"
+  --     # speed 0.25
+  --     # pan (sine)
+  d2 $ "808bd:1(6,8)*2" # pan 0.3 # gain 1.5 # cps (130/120)
+          # cut "-1"
+  d3 $ degrade $ "[808sd:2]*8" # pan 0.5 # gain 3
+  d5 $ fast 2 $ "~ 808ht!3" # speed 2
+
+  d4 $ e 2 (# gain 3) $ (struct "~ [t [t*2]]") $ "hc"
+      # pan 0.5 # gain 0
+      -- # sus 0.1
+      -- # room 0.05
+
+d1 $ "subro"
+
+
+
+  d4 $ stut "2 <2 3>" (3/4) (1/"4 <3 4>") $ "techno:3*8" # cut "-1"
+        -- # speed 0.5
+        -- # triode 1.1
+        # pan 0.8
+        -- # n (choose [9])
+        -- # n "0!3 <0 [2 4]>"
+
 draw $ do
   text (makeJSVar "absolutely disgusting tp3") 0 0 blank blank
 
@@ -111,11 +199,16 @@ draw $ do
 let k x = do
         listEnumToFunc [genRect (x/9) | x <- map makeValue [0..9]]
     genRect dx = do
-      translate (20 * cont) (20*cont) (200 * cont)
-      rect 20 20 20 (20)
+      -- translate ((makeTidalParam "n" + 1)) (10*cont) (20)
+      objScale (2* pan') blank blank
+      rect 20 20 20 200
         where cont = dx
 in draw $ do
-  k (90)
+  translate (-500) (-500) 0
+  listEnumToFunc [k (x*10) | x <- map makeValue [0..7]]
+  translate (500) (100) 0
+  listEnumToFunc [k (x*10) | x <- map makeValue [0..7]]
+  -- k (50)
 
 
 draw $ do {rect 20 20 20 ((200*) $ sin (frameCount*0.003))}

@@ -16,10 +16,12 @@ import Modules.P5Structure
 import Modules.P53D
 import Modules.P5Color
 import Modules.P5Transform
+import Modules.P5Image
 import Modules.P5Setting
 import Modules.DebugFuncs
 
 import P5Enviornment
+import P5FunctionSend
 import P5Expressions
 import P5Render
 import P5JSRenderFuncs

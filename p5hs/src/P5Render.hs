@@ -35,9 +35,11 @@ instance Renderer Rational where
 betweenBrackets :: (Renderer a) => [a] ->JavaScript
 betweenBrackets = (intercalate "," . map render)
 
+listBetweenBrackets :: (Renderer a) => [[a]] ->JavaScript
+listBetweenBrackets = betweenBrackets . concat
+
 -- taken from https://stackoverflow.com/questions/30242668
 -- removePunc xs = [ x | x <- xs, not (x `elem` "?!:;\\\"\'") ]
-removePunc = id
 
 instance Renderer (RenderAble) where
   render (RenderAble a) = render a
@@ -49,10 +51,7 @@ instance Renderer (ArgEx a) where
   render argex = f0
     where f0 = (rationalToFractional . varFunc) argex
 
-
--- instance (Renderer a) => Renderer (ArgEx a) where
---   render argex = removePunc f0
---     where f0 = varFunc argex
+removePunc xs = [ x | x <- xs, not (x `elem` ",.?!-:;\"\'/=") ]
 
 instance (Renderer a) => Renderer (P5Func a) where
   render (Func a) = render a

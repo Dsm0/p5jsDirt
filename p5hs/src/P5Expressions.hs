@@ -1,5 +1,7 @@
 module P5Expressions where
 
+
+import Data.List (intercalate)
 import P5Enviornment
 import P5JSRenderFuncs
 
@@ -21,7 +23,6 @@ instance (Eq a) => Eq (ArgEx a) where
     where (w,z) = (value argex0, value argex1)
           (xf,yf) = (varFunc argex0, varFunc argex1)
 
-
 rationalToFractional x = (map rtf) x
   where rtf '%' = '/'
         rtf c = c
@@ -33,8 +34,13 @@ makeValue a = ArgEx a (show a)
 makeJSVar b = ArgEx (0) (show b)
 makeJSVar' b = ArgEx (0) (b)
 tidalParamString x = "message.get(" ++ (show x) ++ ")"
+tidalParamStringFor fromParam paramToMatch paramToSet = "message.getFrom(" ++ args ++ ")"
+  where args = (intercalate "," . map show) [fromParam,paramToMatch,paramToSet]
 makeTidalParam :: (Num a1, Show a2) => a2 -> ArgEx a1
 makeTidalParam x = makeJSVar' $ tidalParamString x
+
+makeTidalParamFor :: (Num a1, Show a2) => a2 -> a2 -> a2 -> ArgEx a1
+makeTidalParamFor fromParam paramToMatch paramToSet = makeJSVar' $ tidalParamStringFor fromParam paramToMatch paramToSet
 
 instance (Show a, Num a) => Num (ArgEx a) where
   negate argex = ArgEx newX (jsMultiply "-1" (f0))
@@ -158,6 +164,12 @@ instance (Ord a) => Ord (ArgEx a) where
 
 instance (Ord a, Show a, Real a) => Real (ArgEx a) where
   toRational argex = toRational (value argex)
+
+-- instance Foldable (ArgEx) where
+--   foldr func argex0 argex1 = ArgEx (folded) (show folded)
+--     where (w,z) = (value argex0, value argex1)
+--           folded = foldr func w z
+  -- foldMap
 
 -- instance (Real a) => Integral (ArgEx a) where
 --   quot argex0 argex1 = ArgEx (quot w z) ()

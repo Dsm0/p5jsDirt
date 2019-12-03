@@ -22,7 +22,7 @@ data Transform a = ApplyMatrix (ArgEx [[a]])
 instance (Show a, Renderer a) => Renderer (Transform a) where
 -- render([[Matrix]])
   render (ApplyMatrix x) = "applyMatrix(" ++ args ++ ");"
-    where args = betweenBrackets [x]
+    where args = listBetweenBrackets (value x)
   render ResetMatrix = "resetMatrix();"
 -- rotateX(degrees)
   render (RotateX x) = "rotateX(" ++ args ++ ");"

@@ -1,8 +1,9 @@
 :set -XOverloadedStrings
 :set prompt ""
 :set prompt-cont ""
+import P5FunctionSend
 import Sound.Tidal.Context
-import qualified Data.Map as Map_
+
 
 :{
 let p5jsTarget :: OSCTarget
@@ -18,8 +19,8 @@ import Data.List
 :{
 tidal <- startMulti
           [
-          -- superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
-          --   ,
+          superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}
+            ,
             p5jsTarget
               ]
          (defaultConfig {cFrameTimespan = 1/20})
@@ -100,22 +101,26 @@ let setI = streamSetI tidal
 --     var = makeJSVar
 --     tP = makeTidalParam
 
-let toEvent' ws we ps pe v = Event (Just $ Sound.Tidal.Context.Arc ws we) (Sound.Tidal.Context.Arc ps pe) v
-      where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
-    makeFakeMap x y = Map_.fromList [("funcSliceNumber", VI x),("func",VS y)]
-    makeFuncHelp :: Int -> JavaScript -> ControlPattern
-    makeFuncHelp x y = Pattern $ fakeEvent (makeFakeMap x y:: ControlMap)
-      where fakeEvent a notARealArgument = [(toEvent' 0 1 0 1) a]
-    makeFunc :: JavaScript -> [ControlPattern]
-    makeFunc x = [makeFuncHelp 1 x]
-    -- makeFunc x
-    --   | (length x) > 1000 = funcSectionizer $ splitEvery 10000 x
-    --   | otherwise         = [makeFuncHelp x]
-      -- where funcSectionizer longFunc = map (\(x,y) -> makeFuncHelp x y) $ zip [0..] longFunc
-    sendFunc' = mapM_ (streamFirst tidal) . makeFunc
-    sendFunc = sendFunc' . render
-    resetFunc = sendFunc' ""
-    draw = sendFunc
+-- let toEvent' ws we ps pe v = Event (Just $ Sound.Tidal.Context.Arc ws we) (Sound.Tidal.Context.Arc ps pe) v
+--       where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
+--     makeFakeMap x y = Map_.fromList [("funcSliceNumber", VI x),("func",VS y)]
+--     makeFuncHelp :: Int -> JavaScript -> ControlPattern
+--     makeFuncHelp x y = Pattern $ fakeEvent (makeFakeMap x y:: ControlMap)
+--       where fakeEvent a notARealArgument = [(toEvent' 0 1 0 1) a]
+--     makeFunc :: JavaScript -> [ControlPattern]
+--     makeFunc x = [makeFuncHelp 1 x]
+--     -- makeFunc x
+--     --   | (length x) > 1000 = funcSectionizer $ splitEvery 10000 x
+--     --   | otherwise         = [makeFuncHelp x]
+--       -- where funcSectionizer longFunc = map (\(x,y) -> makeFuncHelp x y) $ zip [0..] longFunc
+--     sendFunc' = mapM_ (streamFirst tidal) . makeFunc
+--     sendFunc = sendFunc' . render
+--     resetFunc = sendFunc' ""
+--     draw = sendFunc
+let draw = makeDraw tidal
+    load = makeLoad tidal
+    createImg = makeImage tidal
+
 :}
 
 :set prompt "tidal> "
