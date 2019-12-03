@@ -128,7 +128,7 @@ bdOnly = makeTidalParamFor "s" "bd" "gain"
 d1 $ "bd sd" # gain "<1 2>"
 
 draw $ do
-  rect 200 200 200 (200 * bdOnly)
+  rect 00 (-200) 100 (200 * bdOnly)
 
 draw $ do
   pack (makeJSVar "")
@@ -172,6 +172,7 @@ do
   --     # pan (sine)
   d2 $ "808bd:1(6,8)*2" # pan 0.3 # gain 1.5 # cps (130/120)
           # cut "-1"
+
   d3 $ degrade $ "[808sd:2]*8" # pan 0.5 # gain 3
   d5 $ fast 2 $ "~ 808ht!3" # speed 2
 
@@ -192,9 +193,11 @@ d1 $ "subro"
         -- # n "0!3 <0 [2 4]>"
 
 draw $ do
+  push
+  rotateX (negate $ frameCount*0.02)
+  applymatrix $ makeValue [[1.0,0.5,0.0],[3/4,1.0,0.0],[0.0,0.0,1.0]]
   text (makeJSVar "absolutely disgusting tp3") 0 0 blank blank
-
-  :t text
+  pop
 
 let k x = do
         listEnumToFunc [genRect (x/9) | x <- map makeValue [0..9]]
@@ -212,5 +215,3 @@ in draw $ do
 
 
 draw $ do {rect 20 20 20 ((200*) $ sin (frameCount*0.003))}
-
-:t draw

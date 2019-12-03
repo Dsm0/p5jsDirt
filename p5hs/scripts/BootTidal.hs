@@ -120,7 +120,7 @@ let setI = streamSetI tidal
 let draw = makeDraw tidal
     load = makeLoad tidal
     createImg = makeImage tidal
-
+    reset function = function (pack (makeJSVar ""))
 :}
 
 :set prompt "tidal> "
