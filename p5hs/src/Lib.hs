@@ -28,10 +28,8 @@ import P5Render
 import P5JSRenderFuncs
 import P5Funcs
 import qualified Data.Map as Map_
--- import Modules.ExportedFunctions
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
--- import Modules.P5ModuleList
 import ListWriter
 
 import Sound.Tidal.Context
