@@ -29,8 +29,6 @@ library
   exposed-modules:
       Lib
 
-      Data.Typeable
-      Data.List.Split
       Modules.P5Transform
       Modules.P5Shapes
       Modules.P53D
@@ -47,7 +45,6 @@ library
       P5Render
       P5JSRenderFuncs
       P5Funcs
-      Data.Map
       Exported.ExportedFunctions
       Exported.ExportedVariables
       ListWriter
