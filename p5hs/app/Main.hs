@@ -1,6 +1,6 @@
 module Main where
 
-import P5lib
+import Lib
 import Sound.Tidal.Context
 
 main :: IO ()
