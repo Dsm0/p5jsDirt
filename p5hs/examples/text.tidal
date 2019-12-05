@@ -1,0 +1,24 @@
+let spd = 0.15
+    hey y offset = do
+              push
+              translate 0 y (-50)
+              objScale (abs $ ((10 *)) $ sin (frameCount * 0.001)) blank blank
+              rotateX (185)
+              -- rotateY ((frameCount * spd) + offset)
+              text (makeJSVar "tp3 -- p5hs") 0 (2) blank blank
+              rotateY ((frameCount * spd) + offset)
+              -- text (makeJSVar "absolutely disgusting tp3") 0 0 blank blank
+              pop
+in draw $ do
+  translate (-1800) (500) (-1000)
+  rotateX (3.14159265)
+  -- listEnumToFunc [hey (x*200) (x/(sin $ (frameCount * 0.005))) | x <- map makeValue [-5..20]]
+  push
+  fill (300* (makeTidalParamFor "s" "808bd" "gain")) (230* (makeTidalParamFor "s" "808bd" "gain")) (230* (makeTidalParamFor "s" "808bd" "gain"))
+  listEnumToFunc [hey (x*400) (x/8) | x <- map makeValue [-5..20]]
+  pop
+  translate (2000) (000) (000)
+  rotateY (180)
+  rotateX (3.14159265)
+  -- listEnumToFunc [hey (x*200) (x/(sin $ (frameCount * 0.005))) | x <- map makeValue [-5..20]]
+  -- listEnumToFunc [hey (x*200) (x/8) | x <- map makeValue [-10..10]]

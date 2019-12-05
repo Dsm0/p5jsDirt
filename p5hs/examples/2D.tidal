@@ -1,0 +1,20 @@
+let spd = (makeTidalParam "cps")
+    cn x= (200*) $ sin $ (0.05 * ) (spd + (frameCount*0.05)+ x)
+    bbox x = do
+            translate 200 200 200
+            fill (255 * (x/25)) (255 * (x/55)) (255 * (x/95))
+            rect (cn x) (cn x) (negate $ cn x) (cn x)
+    bbbox x = do
+      push
+      translate (-120) (-160) (-200)
+      bbox x
+      pop
+    bbbbox x' = do
+      push
+      translate (-100 + x') (-15) 0
+      listEnumToFunc [bbbox (x*5) | x <- map makeValue [0..2]]
+      pop
+in draw $ do
+  -- translateX $ ((200 * ) $ makeTidalParam "room")
+  listEnumToFunc [bbbbox (x*100) | x <- map makeValue [0..5]]
+  -- listEnumToFunc [bbbbox (x*100) | x <- map makeValue [-0..5]]

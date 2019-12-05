@@ -31,8 +31,8 @@ s.latency = 0.3; // increase this if you get "late" messages
 (
 ~dirt.loadSoundFiles("/M/Documents/songSamp/*");
 ~dirt.loadSoundFiles("/M/Documents/customSamples/*");
-~dirt.loadSoundFiles("/M/Documents/customSamples/*");
 s.volume = (0);
+
 SynthDef(\sy1, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 SynthDef(\sy2, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;
 SynthDef(\sy3, {|out=0, freq=440| Out.ar(out, DC.ar(0)) }).add;

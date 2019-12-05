@@ -1,0 +1,31 @@
+let boxtrain = do {
+      let fcConstant = (frameCount/5)
+          spd = (sin (fcConstant*0.00016))
+          xshift = (sin (fcConstant*0.0001))*2
+          box' x = do
+            push
+            -- line (20*fcConstant) 2 40 500
+            rotateY $ (fcConstant * x)*0.0001
+            -- rotate (makeTidalParam "cps")
+            rotate $ (fcConstant ** 2 * x)*0.000005
+            rotateZ $ (fcConstant * x)*0.0001
+            rotateX $ (fcConstant * x)*0.001
+            translate xshift (90 * (x**2)) blank
+            box 200 0 (200) 200 blank
+            circle 0 ((frameCount**0.3 + frameCount*0.2)/200) 100
+            torus 200 20 (x**2)
+            pop
+        -- rotate cps'
+          boxes = [box' x | x <- fmap makeValue [1..3]]
+      in listEnumToFunc boxes }
+    b2 = do
+      boxtrain
+      box 200 0 200 200 blank
+      translate (-200) (30) 100
+      rotateZ 20
+in draw $ do
+  translate (-500) (-200) (-2000)
+  fill (255*(makeTidalParam "begin")) (255*(makeTidalParam "begin")) (255*(makeTidalParam "begin"))
+  -- rotateX (2000 + (makeTidalParam "begin")*40)
+  rotateZ (200)
+  listEnumToFunc (take (30) $ cycle [b2])

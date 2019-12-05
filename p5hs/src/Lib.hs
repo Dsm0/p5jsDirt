@@ -20,6 +20,7 @@ import Modules.P5Structure
 import Modules.P5Setting
 import Modules.P5Text
 import Modules.P5Image
+import Modules.P5Attributes
 
 import P5Enviornment
 import P5FunctionSend
@@ -31,6 +32,8 @@ import qualified Data.Map as Map_
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
 import ListWriter
+
+import UsefulFuncs
 
 import Sound.Tidal.Context
 

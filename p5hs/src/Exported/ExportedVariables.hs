@@ -27,9 +27,21 @@ getURL           = makeJSVar GetURL  :: ArgEx ArgExD
 getURLPath       = makeJSVar GetURLPath  :: ArgEx ArgExD
 getURLParams     = makeJSVar GetURLParams  :: ArgEx ArgExD
 
-
 blank            = makeJSVar Blank :: ArgEx ArgExD
 undefined'       = blank
+
+radius           =  makeJSVar Radius :: ArgEx ArgExD
+center           =  makeJSVar Center :: ArgEx ArgExD
+corner           =  makeJSVar Corner :: ArgEx ArgExD
+corners          =  makeJSVar Corners :: ArgEx ArgExD
+roundEdge        =  makeJSVar Round :: ArgEx ArgExD
+square           =  makeJSVar Square :: ArgEx ArgExD
+project          =  makeJSVar Project :: ArgEx ArgExD
+milter           =  makeJSVar Milter :: ArgEx ArgExD
+bevel            =  makeJSVar Bevel :: ArgEx ArgExD
+
+
+
 
 
 

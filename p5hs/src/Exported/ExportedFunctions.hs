@@ -13,6 +13,7 @@ import Modules.P5Structure
 import Modules.P5Setting
 import Modules.P5Text
 import Modules.P5Image
+import Modules.P5Attributes
 
 import P5Enviornment
 import P5Render
@@ -79,8 +80,21 @@ textStyle x = pack (TextStyle x :: P5Text ArgExD)
 textWidth x = pack (TextWidth x :: P5Text ArgExD)
 textAscent = pack (TextAscent :: P5Text ArgExD)
 textDescent = pack (TextDescent :: P5Text ArgExD)
-text w x y z a = pack (Text w x y z a :: P5Text ArgExD)
+text w x y z a = pack (Text (makeJSVar w) x y z a :: P5Text ArgExD)
 textFont x = pack (TextFont x :: P5Text ArgExD)
+
+
+ellipseMode x = pack (EllipseMode x :: Attribute (ArgExD))
+noSmooth = pack (NoSmooth :: Attribute (ArgExD))
+rectMode x = pack (RectMode x :: Attribute (ArgExD))
+smooth = pack (Smooth :: Attribute (ArgExD))
+strokeCap x = pack (StrokeCap x :: Attribute (ArgExD))
+strokeJoin x = pack (StrokeJoin x :: Attribute (ArgExD))
+strokeWeight x = pack (StrokeWeight x :: Attribute (ArgExD))
+
+
+
+
 
 -- createImage x = CreateImg (makeJSVar x) :: Image ArgExD
 image x y z a b = pack (Image (makeJSVar x) y z a b :: Image ArgExD)

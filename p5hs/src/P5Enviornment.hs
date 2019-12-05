@@ -20,6 +20,15 @@ data JSVar =
                           | GetURL
                           | GetURLPath
                           | GetURLParams
+                          | Radius
+                          | Center
+                          | Corner
+                          | Corners
+                          | Round
+                          | Square
+                          | Project
+                          | Milter
+                          | Bevel
                           | Blank
 
 instance Show JSVar where
@@ -43,3 +52,12 @@ instance Show JSVar where
   show GetURLPath       =    "getURLPath()"
   show GetURLParams     =    "getURLParams()"
   show Blank            =    "undefined"
+  show Radius           =    "RADIUS"
+  show Center           =    "CENTER"
+  show Corner           =    "CORNER"
+  show Corners          =    "CORNERS"
+  show Round            =    "ROUND"
+  show Square           =    "SQUARE"
+  show Project          =    "PROJECT"
+  show Milter           =    "MILTER"
+  show Bevel            =    "BEVEL"

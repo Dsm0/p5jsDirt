@@ -1,0 +1,54 @@
+:script scripts/BootTidal.hs
+
+
+let bdOnly = makeTidalParamFor "s" "bd" "gain"
+    begin' = makeTidalParam "begin"
+    end' = makeTidalParam "end"
+
+
+
+d1 $ e 8 (linger "0.5" . (# speed "-0.5")) $ fast 4
+  $ chop 4 $ slice 8 "[<<0 5*1> [5 ~]>]*2" $ "breaks157" # cut "-1"
+  # room "0.25 0 0 0"
+  -- # room 0.08
+  # speed 0.5
+  # gain 1.5 # cps (85/120)
+d2 $ "808bd:0*12" # gain (rand*2) # orbit 0
+
+
+lfo x = sin (frameCount * (0.01 * x))
+
+let spd = 0.0625
+    torus' x y z x2 = do
+                    push
+                    translate x y z
+                    translate (800 - 400) 0 0
+                    rotateZ (-0.02*frameCount)
+                    torus 200 (10) (x2)
+                    pop
+    torusLine x (y1,y2,y3) x2 = do
+                  push
+                  translateY x
+                  translateX (-100*frameCount*0.0002)
+                  listEnumToFunc [ do
+                    fill y1 y2 (y3 + x**2)
+                    translateY (lfo (x*8))
+                    torus' (x*200) 0 (x*100 + (200 * (lfo 2))) x2
+                    | x <- map makeValue [-10..10]]
+                  pop
+in draw $ do
+  rotateY 60
+  torusLine (-400) (100,(end' - 0.125)*200,1) 2
+  push
+  translateX (-400*(1.5 - (end')))
+  torusLine (00) (((end' - 0.125)*80)**2,50,60) 4
+  pop
+  torusLine 400 (100,60,(end' - 0.125)*200) 9
+
+
+
+
+
+draw $ do
+  consoleLog $ lfo 1
+  -- consoleLog deltaTime

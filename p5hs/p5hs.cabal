@@ -38,6 +38,7 @@ library
       Modules.P5Setting
       Modules.P5Text
       Modules.P5Image
+      Modules.P5Attributes
 
       P5Enviornment
       P5FunctionSend
@@ -48,6 +49,8 @@ library
       Exported.ExportedFunctions
       Exported.ExportedVariables
       ListWriter
+
+      UsefulFuncs
 
 
   other-modules:
