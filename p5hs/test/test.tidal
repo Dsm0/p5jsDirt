@@ -8,7 +8,6 @@ import P5Render
 
 prettyRender $ makeJSVar "CENTER"
 
-
 render $ LerpColor (Color 2 2 2) (Color 2 2 3) (makeValue 0.3)
 
 render $ do
@@ -18,7 +17,6 @@ render $ do
 d1 $ "808bd:2*8" # gain 1
     # size 0.8
     # room 0.4
-
 
 d1 $ ""
 

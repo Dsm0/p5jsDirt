@@ -37,6 +37,15 @@ let spd = 0.0625
                     | x <- map makeValue [-10..10]]
                   pop
 in draw $ do
+  text "step 6 (mandatory): \n repeat step 4" (-200) 0 blank blank
+  push
+  translateY (200)
+  text (take 400 $ (cycle "\nstep 4")) (-200) (-2000) blank blank
+  fill 255 0 0
+  text "that's all she wrote" (-200) 0 blank blank
+  text "that's all she wrote" (-200) 50 blank blank
+  -- text "that's all she wrote" (-200) 40 blank blank
+  pop
   rotateY 60
   torusLine (-400) (100,(end' - 0.125)*200,1) 2
   push
