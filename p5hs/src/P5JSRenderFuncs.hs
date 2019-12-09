@@ -2,12 +2,33 @@ module P5JSRenderFuncs where
 
 bracket x = "(" ++ x ++ ")"
 
+
+jsEq x y = bracket $ x ++ " == " ++ y
+jsNEq x y = bracket $ x ++ " != " ++ y
+jsGt x y = bracket $ x ++ " > " ++ y
+jsLt x y = bracket $ x ++ " < " ++ y
+jsGtEq x y = bracket $ x ++ " >= " ++ y
+jsLtEq x y = bracket $ x ++ " <= " ++ y
+
 jsAdd x y = bracket $ x ++ " + " ++ y
 jsMultiply x y = bracket $ x ++ " * " ++ y
 jsAbs x = bracket ("Math.abs(" ++ x ++ ")")
 jsSign x = bracket ("Math.sign(" ++ x ++ ")")
 --
 jsDivide x y = bracket (x ++ " / " ++ y)
+
+jsFloor x = bracket ("Math.floor" ++ (bracket x))
+jsCeil x = bracket ("Math.ceil" ++ (bracket x))
+jsRound x = bracket ("Math.round" ++ (bracket x))
+
+jsQuot x y = jsFloor (bracket dived)
+  where dived = jsDivide x y
+jsDiv x y = jsFloor (jsDivide x y)
+
+jsMod x y = bracket (x ++ " % " ++ y)
+
+jsFrac x = bracket $ jsMod x (jsFloor x)
+
 --
 jsIntegralDiv x y = bracket ("Math.floor(" ++ (jsDivide x y) ++ ")")
 jsLessThan x y = bracket (x ++ " < " ++ y)

@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts, AllowAmbiguousTypes #-}
 
 module Exported.ExportedVariables where
 
@@ -7,54 +7,93 @@ import P5Enviornment
 
 -- Enviornment Variables ::::::
 
-frameCount       = makeJSVar FrameCount :: ArgEx ArgExD
-deltaTime        = makeJSVar DeltaTime  :: ArgEx ArgExD
-focused          = makeJSVar Focused  :: ArgEx ArgExD
-cursor           = makeJSVar Cursor  :: ArgEx ArgExD
-frameRate        = makeJSVar FrameRate  :: ArgEx ArgExD
-noCursor         = makeJSVar NoCursor  :: ArgEx ArgExD
-displayWidth     = makeJSVar DisplayWidth  :: ArgEx ArgExD
-displayHeight    = makeJSVar DisplayHeight  :: ArgEx ArgExD
-windowWidth      = makeJSVar WindowWidth  :: ArgEx ArgExD
-windowHeight     = makeJSVar WindowHeight  :: ArgEx ArgExD
-windowResized    = makeJSVar WindowResized  :: ArgEx ArgExD
-width            = makeJSVar Width  :: ArgEx ArgExD
-height           = makeJSVar Height  :: ArgEx ArgExD
-fullscreen       = makeJSVar Fullscreen  :: ArgEx ArgExD
-pixelDensity     = makeJSVar PixelDensity  :: ArgEx ArgExD
-displayDensity   = makeJSVar DisplayDensity  :: ArgEx ArgExD
-getURL           = makeJSVar GetURL  :: ArgEx ArgExD
-getURLPath       = makeJSVar GetURLPath  :: ArgEx ArgExD
-getURLParams     = makeJSVar GetURLParams  :: ArgEx ArgExD
+frameCount :: Num a => ArgEx a
+-- frameCountD      = makeJSVar FrameCount :: ArgEx ArgExD
+-- frameCountI      = makeJSVar FrameCount :: ArgEx ArgExI
+frameCount      = makeJSVar FrameCount -- :: Num a => ArgEx a
+-- frameCount       = frameCountD
 
-blank            = makeJSVar Blank :: ArgEx ArgExD
+deltaTime  :: Num a => ArgEx a
+deltaTime        = makeJSVar DeltaTime
+focused  :: Num a => ArgEx a
+focused          = makeJSVar Focused
+cursor  :: Num a => ArgEx a
+cursor           = makeJSVar Cursor
+frameRate  :: Num a => ArgEx a
+frameRate        = makeJSVar FrameRate
+noCursor  :: Num a => ArgEx a
+noCursor         = makeJSVar NoCursor
+displayWidth  :: Num a => ArgEx a
+displayWidth     = makeJSVar DisplayWidth
+displayHeight  :: Num a => ArgEx a
+displayHeight    = makeJSVar DisplayHeight
+windowWidth  :: Num a => ArgEx a
+windowWidth      = makeJSVar WindowWidth
+windowHeight  :: Num a => ArgEx a
+windowHeight     = makeJSVar WindowHeight
+windowResized  :: Num a => ArgEx a
+windowResized    = makeJSVar WindowResized
+width  :: Num a => ArgEx a
+width            = makeJSVar Width
+height  :: Num a => ArgEx a
+height           = makeJSVar Height
+fullscreen  :: Num a => ArgEx a
+fullscreen       = makeJSVar Fullscreen
+pixelDensity  :: Num a => ArgEx a
+pixelDensity     = makeJSVar PixelDensity
+displayDensity  :: Num a => ArgEx a
+displayDensity   = makeJSVar DisplayDensity
+getURL  :: Num a => ArgEx a
+getURL           = makeJSVar GetURL
+getURLPath  :: Num a => ArgEx a
+getURLPath       = makeJSVar GetURLPath
+getURLParams  :: Num a => ArgEx a
+getURLParams     = makeJSVar GetURLParams
+--
+blank            = makeJSVar Blank :: Num a => ArgEx a
 undefined'       = blank
-
-radius           =  makeJSVar Radius :: ArgEx ArgExD
-center           =  makeJSVar Center :: ArgEx ArgExD
-corner           =  makeJSVar Corner :: ArgEx ArgExD
-corners          =  makeJSVar Corners :: ArgEx ArgExD
-roundEdge        =  makeJSVar Round :: ArgEx ArgExD
-square           =  makeJSVar Square :: ArgEx ArgExD
-project          =  makeJSVar Project :: ArgEx ArgExD
-milter           =  makeJSVar Milter :: ArgEx ArgExD
-bevel            =  makeJSVar Bevel :: ArgEx ArgExD
-
-
-
+--
+radius :: Num a => ArgEx a
+radius           =  makeJSVar Radius
+center :: Num a => ArgEx a
+center           =  makeJSVar Center
+corner :: Num a => ArgEx a
+corner           =  makeJSVar Corner
+corners :: Num a => ArgEx a
+corners          =  makeJSVar Corners
+roundEdge :: Num a => ArgEx a
+roundEdge        =  makeJSVar Round
+square :: Num a => ArgEx a
+square           =  makeJSVar Square
+project :: Num a => ArgEx a
+project          =  makeJSVar Project
+milter :: Num a => ArgEx a
+milter           =  makeJSVar Milter
+bevel :: Num a => ArgEx a
+bevel            =  makeJSVar Bevel
+i :: Num a => ArgEx a
+i                =  makeJSVar I
 
 
 
 -- tidal Params
 -- they all end with ' as to not overwrite the definitions used by tidalcycles
-cps' = makeTidalParam "cps" :: ArgEx ArgExD
-s' = makeTidalParam "s" :: ArgEx ArgExD
-orbit' = makeTidalParam "orbit" :: ArgEx ArgExD
-delta' = makeTidalParam "delta" :: ArgEx ArgExD
-cycle' = makeTidalParam "cycle" :: ArgEx ArgExD
-gain' = makeTidalParam "gain" :: ArgEx ArgExD
-pan' = makeTidalParam "pan" :: ArgEx ArgExD
-begin' = makeTidalParam "begin" :: ArgEx ArgExD
+cps' :: Num a => ArgEx a
+cps' = makeTidalParam "cps" :: Num a => ArgEx a
+s' :: Num a => ArgEx a
+s' = makeTidalParam "s" :: Num a => ArgEx a
+orbit' :: Num a => ArgEx a
+orbit' = makeTidalParam "orbit" :: Num a => ArgEx a
+delta' :: Num a => ArgEx a
+delta' = makeTidalParam "delta" :: Num a => ArgEx a
+cycle' :: Num a => ArgEx a
+cycle' = makeTidalParam "cycle" :: Num a => ArgEx a
+gain' ::  Num a => ArgEx a
+gain' = makeTidalParam "gain" :: Num a => ArgEx a
+pan' :: Num a => ArgEx a
+pan' = makeTidalParam "pan" :: Num a => ArgEx a
+begin' :: Num a => ArgEx a
+begin' = makeTidalParam "begin" :: Num a => ArgEx a
 -- these are just some paramaters included in
 -- nearly every tidal osc messag
 

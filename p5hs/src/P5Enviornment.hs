@@ -30,6 +30,7 @@ data JSVar =
                           | Milter
                           | Bevel
                           | Blank
+                          | I
 
 instance Show JSVar where
   show FrameCount       =    "frameCount"
@@ -61,3 +62,4 @@ instance Show JSVar where
   show Project          =    "PROJECT"
   show Milter           =    "MILTER"
   show Bevel            =    "BEVEL"
+  show I                =    "i"

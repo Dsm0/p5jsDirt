@@ -33,6 +33,9 @@ import Exported.ExportedFunctions
 import Exported.ExportedVariables
 import ListWriter
 
+import HigherOrder.P5Bool
+import HigherOrder.P5Loops
+
 import UsefulFuncs
 
 import Sound.Tidal.Context

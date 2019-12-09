@@ -38,6 +38,7 @@ betweenBrackets = (intercalate "," . map render)
 listBetweenBrackets :: (Renderer a) => [[a]] ->JavaScript
 listBetweenBrackets = betweenBrackets . concat
 
+
 -- taken from https://stackoverflow.com/questions/30242668
 -- removePunc xs = [ x | x <- xs, not (x `elem` "?!:;\\\"\'") ]
 

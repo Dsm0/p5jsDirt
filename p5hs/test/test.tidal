@@ -45,9 +45,14 @@ in draw $ do
   fill 150 0 0
   applymatrix (makeValue mat')
   listEnumToFunc [do
-                    text (makeJSVar "DEMO") (100 - (frameCount/3)) (x*15) blank blank
+                    text (makeJSVar "DEMO") (100 - (frameCount/1)) (x*15) blank blank
                     |x <- map makeValue [0..2]]
   pop
+
+
+
+draw $
+
 
   reset draw
 
@@ -105,12 +110,12 @@ d1 $ "808:2*64"
 
 k = do
   translate (-200) (-200) (-200)
-  rect 200 200 200 (50 + (100 * (lfo 4)))
-  rect 200 200 (20 + (100 * (lfo 4) + 100)) 200
-  rect 200 (20 + (100 * (lfo 4) + 250)) 200 200
-  rect (20 + (100 * (lfo 4) + 300)) 200 200 200
+  rect 200 200 200 (50 + (100 * (lfo' 4)))
+  rect 200 200 (20 + (100 * (lfo' 4) + 100)) 200
+  rect 200 (20 + (100 * (lfo' 4) + 250)) 200 200
+  rect (20 + (100 * (lfo' 4) + 300)) 200 200 200
   translate (-200) (-200) (-200)
-  rect (20 + (100 * (20 + lfo 4) + 350)) 200 200 200
+  rect (20 + (100 * (20 + lfo' 4) + 350)) 200 200 200
   translate (-200) (-200) (-200)
 
 k2 = do
@@ -129,7 +134,6 @@ k4 = do
 
 draw $ do
   k2
-
   translate 0 0 (-8000)
   -- rotateX ((2+) $ lfo 3)
   rotateY $ frameCount*0.0005
@@ -144,12 +148,20 @@ draw $ do
   k4
   k4
 
+applymatrix $
+:set -XFlexibleContexts
+
 
 
 d1 $ slice 8 "0..7" $ "xxx"
 
+
+reset draw
+
 draw $ do
-  applymatrix $ makeValue [[1,0,0],[1/((200 *) $ sin $ makeJSVar (frameCount*0.01)),1,0],[0.8,0,1]]
+  -- applymatrix $ makeValue [[1,0,0],[1/((200 *) $ sin $ makeJSVar (frameCount*0.01)),1,0],[0.8,0,1]]
+  rotate(mod frameCount 8)
+  applymatrix [[1,0,0],[40,1,0],[3,0,1]]
   rect 100 100 (-100) (-100)
 
 
@@ -423,3 +435,95 @@ let step5 = "step5 (optional): \n audio"
     shape 20
     translateX (400)
     shape 200
+
+
+
+
+
+
+
+do
+  hush
+  d1 $ slow 4 $ slice 12 "[[4 5]@2 6 3]!7 [[2 ~ ~ <~ ~ ~ <0 0>>]*2] " $ "xtcy" # cut "-1" # gain 1.2
+      # speed 0.75
+      # legato 1 # shape 0.2
+      # cps (90/120)
+  d5 $ "~ sf:3" # comb 0.12 # gain 2.2 # orbit 0 # cut "-1"
+        # triode 2.2
+  d2 $ fix (# n (choose [0,1,2,3])) (s "tabla")
+      $ fast 2 $ "[<<808bd:0 ~> <tabla tabla>>, [tam:2 [~ ~ ~ ~ ~ ~] sid:8!2]*2]"
+        # comb 0.2
+        # distort 0.2
+        # speed "0.9"
+        # gain 1.3
+        # orbit 0
+
+
+
+
+-- d1 $ slice 8 "0 1 0 0 <2*1> 0 1 0" $ "breaks125:5"
+--       # lpf 500
+--       # distort 0.25
+
+
+do
+  hush
+  d1 $ slow 8 $ slice 16 "[0..6] [[10 11 12 13]]!7" $ "tabla:1"
+      # speed 0.45 # distort 0.2 # end 0.5
+      # up "0 -12!7"
+  d2 $ "~ [rs9:0,future:2,short:1]" # triode 1.4 # gain 1.2 # orbit 0 # cut "-1"
+  d3 $ n "<1(1,8) 0 0 0> ~ ~ ~ ~ ~ 0" # "808bd" # gain 2 # orbit 0
+
+  d2 $ fix (# n (choose [0,1,2,3])) (s "tabla")
+      $ fast 2 $ "[<<808bd:0 ~> <tabla tabla>>, [tam:2 [~ ~ ~ ~ ~ ~] sid:8!2]*2]"
+        # comb 0.2
+        # distort 0.2
+        # speed "0.9"
+        # gain 1.3
+        # orbit 0
+
+
+
+
+
+
+
+properFraction 0.5
+:info Integral
+
+
+
+
+        -- over the space of 2 beats
+allRythmssBinary = ["t@2","t t","t*4","t t ~ t","t t@3", "t@3 t", "t*6","t*8",
+              "t@2 t*2","t*2 t@2","[t*2 t@2]*2","[t@2 t*2]*2","[t t@2 t]*2",
+              "[t@3 t]*2","[t t@3]*2"]
+
+
+allRythmssTernary = ["t@3","t*2","[t@2 t]*2","[t t@2]*2","[t*3]*2",
+                                "[t t t*2]","[t t*2]", "[t*2 t t]",
+                                "[t t t*2]*2","[t t*2 t]*2","[t*2 t t]*2",
+                                "[t*2 t*2 t]*2","[t*2 t t*2]*2","[t t*2 t*2]*2",
+                                "[t*6]*2",
+                                "[t@3 t t@2]*2","[t@3 t t*2]*2",
+                                "[t t@3 t@2]*2","[t t@3 t*2]*2",
+                                "[t@2 t t@3]*2","[t*2 t t@3]*2",
+                                "[t@2 t@3 t]*2","[t*2 t@3 t]*2",
+                                "[t@3 t t@2]*2","[t@3 t t*2]*2"] :: [Pattern]
+
+once $ struct (parseBP_E $ choose allRythmssTernary) $ "bd"
+                                once $ struct "t@3 t t@2"$ "bd"
+
+
+
+d1 $ fast 2 $ n (scale "<minPent>" "0 1 2 3") # "rash" # gain 1.25 |+| n 40
+
+
+:info RealFrac
+:t properFraction
+
+properFraction 1
+
+
+
+quot (frameCount) (makeValue 2)

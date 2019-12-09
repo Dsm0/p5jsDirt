@@ -5,7 +5,7 @@ import P5Render
 
 import Data.Matrix
 
-data Transform a = ApplyMatrix (ArgEx [[a]])
+data Transform a = ApplyMatrix ([[ArgEx a]])
                  | ResetMatrix
                  | RotateX (ArgEx a)
                  | RotateY (ArgEx a)
@@ -22,7 +22,7 @@ data Transform a = ApplyMatrix (ArgEx [[a]])
 instance (Show a, Renderer a) => Renderer (Transform a) where
 -- render([[Matrix]])
   render (ApplyMatrix x) = "applyMatrix(" ++ args ++ ");"
-    where args = listBetweenBrackets (value x)
+    where args = listBetweenBrackets x
   render ResetMatrix = "resetMatrix();"
 -- rotateX(degrees)
   render (RotateX x) = "rotateX(" ++ args ++ ");"

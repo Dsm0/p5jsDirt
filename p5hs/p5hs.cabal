@@ -40,6 +40,9 @@ library
       Modules.P5Image
       Modules.P5Attributes
 
+      HigherOrder.P5Bool
+      HigherOrder.P5Loop
+
       P5Enviornment
       P5FunctionSend
       P5Expressions
