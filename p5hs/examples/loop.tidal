@@ -1,0 +1,4 @@
+draw $ do
+  translate (-500) (-500) 0
+  foriInRange 0 (i #< (mod (frameCount // 8) 50)) 1 $ do
+    rect 200 20 (20*(mod i 5)) (20*i)

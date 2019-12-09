@@ -30,7 +30,6 @@ jsMod x y = bracket (x ++ " % " ++ y)
 jsFrac x = bracket $ jsMod x (jsFloor x)
 
 --
-jsIntegralDiv x y = bracket ("Math.floor(" ++ (jsDivide x y) ++ ")")
 jsLessThan x y = bracket (x ++ " < " ++ y)
 jsGreaterThan x y = bracket (x ++ " > " ++ y)
 --

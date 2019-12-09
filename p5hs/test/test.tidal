@@ -154,13 +154,22 @@ applymatrix $
 
 
 d1 $ slice 8 "0..7" $ "xxx"
+value =
+
+jsMod (varFunc frameCount) (varFunc (makeValue 8))
+:t frameCount
+import P5JSRenderFuncs
+
+mod_ argex0 argex1 = ArgEx (mod w z) (P5JSRenderFuncs.jsMod f0 f1)
+  where (w,z) = (P5Expressions.value argex0, P5Expressions.value argex1)
+        (f0,f1) = (varFunc argex0, varFunc argex1)
 
 
-reset draw
+render (1 * 0.004 * 1.0)
 
-draw $ do
-  -- applymatrix $ makeValue [[1,0,0],[1/((200 *) $ sin $ makeJSVar (frameCount*0.01)),1,0],[0.8,0,1]]
-  rotate(mod frameCount 8)
+render $ do
+  rotate(mod_ frameCount 8)
+
   applymatrix [[1,0,0],[40,1,0],[3,0,1]]
   rect 100 100 (-100) (-100)
 

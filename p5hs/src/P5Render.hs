@@ -5,7 +5,9 @@ module P5Render where
 import P5Expressions
 import P5Funcs
 import Data.List
+import Data.Ratio
 import ListWriter
+
 
 type JavaScript = String
 
@@ -32,11 +34,18 @@ instance Renderer Double where
 instance Renderer Rational where
   render a = (rationalToFractional . show) a
 
+-- instance (Num a, Fractional a) => Renderer a where
+--   render a = (rationalToFractional . show) a
+
+-- instance (Ratio a) => Renderer (Ratio a) where
+--   render a = (rationalToFractional . show) a
+
 betweenBrackets :: (Renderer a) => [a] ->JavaScript
 betweenBrackets = (intercalate "," . map render)
 
 listBetweenBrackets :: (Renderer a) => [[a]] ->JavaScript
 listBetweenBrackets = betweenBrackets . concat
+
 
 
 -- taken from https://stackoverflow.com/questions/30242668
@@ -50,7 +59,7 @@ instance (Renderer a) => Renderer [a] where
 
 instance Renderer (ArgEx a) where
   render argex = f0
-    where f0 = (rationalToFractional . varFunc) argex
+    where f0 = varFunc argex
 
 removePunc xs = [ x | x <- xs, not (x `elem` ",.?!-:;\"\'/=") ]
 

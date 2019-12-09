@@ -5,8 +5,8 @@ module HigherOrder.P5Bool where
 import P5Expressions
 import P5Render
 import ListWriter
+import qualified Data.Fixed
 import P5JSRenderFuncs
-import Data.Fixed
 
 (#==) :: (ArgEx a) -> (ArgEx a) -> P5BoolConstructor a
 (#==) argex0 argex1 = P5Eq argex0 argex1

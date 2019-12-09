@@ -37,7 +37,7 @@ rationalToFractional x = (map rtf) x
         rtf c = c
 
 instance (Show a) => Show (ArgEx a) where
-  show argex = (rationalToFractional . varFunc) argex
+  show argex = (varFunc) argex
 
 makeValue :: (Num a,Show a) => a -> ArgEx a
 makeValue a = ArgEx a (show a)
@@ -72,7 +72,7 @@ instance (Show a, Num a) => Num (ArgEx a) where
           newX = value argex
 
 instance (Fractional a , Real a, Show a) => Fractional (ArgEx a)  where
-  (/) argex0 argex1 = ArgEx (w / z) (jsDivide f0 f1)
+  (/) argex0 argex1 = ArgEx (w / z) (jsMod f0 f1)
     where (w,z) = (value argex0, value argex1)
           (f0,f1) = (varFunc argex0, varFunc argex1)
   recip argex = ArgEx (1 / w) (jsDivide "1" (bracket f0) )
@@ -190,7 +190,7 @@ instance (Show a, Enum a, Real a, Integral a) => Integral (ArgEx a) where
   quot argex0 argex1 = ArgEx (quot w z) (jsQuot f0 f1)
     where (w,z) = (value argex0, value argex1)
           (f0,f1) = (varFunc argex0, varFunc argex1)
-  rem argex0 argex1 = ArgEx (mod w z) (jsQuot f0 f1)
+  rem argex0 argex1 = ArgEx (rem w z) (jsQuot f0 f1)
     where (w,z) = (value argex0, value argex1)
           (f0,f1) = (varFunc argex0, varFunc argex1)
   div argex0 argex1 = ArgEx (div w z) (jsDiv f0 f1)
@@ -202,17 +202,15 @@ instance (Show a, Enum a, Real a, Integral a) => Integral (ArgEx a) where
   quotRem argex0 argex1 = (quot',rem')
     where quot' = quot argex0 argex1
           rem' = rem argex0 argex1
-          (w,z) = (value argex0, value argex1)
-          (f0,f1) = (varFunc argex0, varFunc argex1)
+          -- (w,z) = (value argex0, value argex1)
+          -- (f0,f1) = (varFunc argex0, varFunc argex1)
   divMod argex0 argex1 = (div', mod')
     where div' = div argex0 argex1
           mod'  = mod argex0 argex1
-          (w,z) = (value argex0, value argex1)
-          (f0,f1) = (varFunc argex0, varFunc argex1)
+          -- (w,z) = (value argex0, value argex1)
+          -- (f0,f1) = (varFunc argex0, varFunc argex1)
   toInteger argex = toInteger w
     where w = value argex
-
-
 
 
 round' argex = ArgEx (round w) (jsRound f0)
@@ -233,7 +231,7 @@ instance (Integral a, RealFrac a, Show a) => RealFrac (ArgEx a) where
           (pf1,pf2) = properFraction w
           w = value argex
           f0 = varFunc argex
-  
+
   -- round :: (Num a, Integral b) => ArgEx a -> ArgEx b
   -- round argex = ArgEx (round w) ""
   --   where w = value argex

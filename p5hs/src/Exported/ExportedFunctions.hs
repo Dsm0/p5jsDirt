@@ -170,7 +170,7 @@ strokeWeight x = pack (StrokeWeight x)
 while' :: (Show a, Num a, Renderer a) => (P5BoolConstructor a) -> (ListM RenderAble) -> ListM RenderAble
 -- (DoWhile x y :: P5Loop (P5BoolConstructor ArgExD))
 while' x listm = pack (DoWhile x listm)
-iInRange x bool listm = pack (ForIInRange x bool listm)
+foriInRange x bool step listm = pack (ForIInRange x bool step listm)
 
 -- createImage x = CreateImg (makeJSVar x) :: Image ArgExD
 image x y z a b = pack (Image (makeJSVar x) y z a b :: Image ArgExD)
