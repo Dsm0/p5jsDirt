@@ -2,7 +2,6 @@ module P5JSRenderFuncs where
 
 bracket x = "(" ++ x ++ ")"
 
-
 jsEq x y = bracket $ x ++ " == " ++ y
 jsNEq x y = bracket $ x ++ " != " ++ y
 jsGt x y = bracket $ x ++ " > " ++ y

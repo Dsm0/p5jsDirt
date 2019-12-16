@@ -1,13 +1,17 @@
 var messages = [new Thing({})];
 var drawFunc = "box(200,200,200)";
 var assets = {"imageURLs" : {}, "images" : {}};
+let microphone, fft;
 
 function setup() {
   createCanvas(windowWidth, windowHeight,WEBGL);
   textSize(40);
   rockSalt = loadFont("fonts/RockSalt.ttf");
   textFont(rockSalt,48);
-  // textFont('Georgia',48);
+  microphone = new p5.AudioIn();
+  microphone.start();
+  // fft = new p5.FFT();
+  // fft.setInput(microphone);
 };
 
 function preload(){

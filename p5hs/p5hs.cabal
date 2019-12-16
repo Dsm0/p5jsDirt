@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       Lib
+      P5hs
 
       Modules.P5Transform
       Modules.P5Shapes
@@ -41,7 +42,7 @@ library
       Modules.P5Attributes
 
       HigherOrder.P5Bool
-      HigherOrder.P5Loop
+      HigherOrder.P5Loops
 
       P5Enviornment
       P5FunctionSend
@@ -49,6 +50,7 @@ library
       P5Render
       P5JSRenderFuncs
       P5Funcs
+      P5Audio
       Exported.ExportedFunctions
       Exported.ExportedVariables
       ListWriter
@@ -67,6 +69,8 @@ library
     , matrix
     , tidal >= 1.4.4
     , split
+    , vivid
+    , turtle
   default-language: Haskell2010
 
 executable p5hs-exe
@@ -79,7 +83,9 @@ executable p5hs-exe
   build-depends:
       base >=4.7 && <5
     , p5hs
+    , process
     , tidal > 1.4.4
+    , turtle
   default-language: Haskell2010
 
 test-suite p5hs-test

@@ -135,8 +135,8 @@ k4 = do
 draw $ do
   k2
   translate 0 0 (-8000)
-  -- rotateX ((2+) $ lfo 3)
-  rotateY $ frameCount*0.0005
+  rotateX ((2+) $ lfo' 3)
+  -- rotateY $ frameCount*0.0005
   translate (-200) (00) 0
   k4
   rotateY 180
@@ -148,13 +148,54 @@ draw $ do
   k4
   k4
 
-applymatrix $
-:set -XFlexibleContexts
+render initFFT
+
+draw $ do
+  initFFT
+  -- consoleLog (freqBin 80)
+  -- rotateZ (lfo' 20)
+  rect (80 + 80) 20 20 (20 + 200*(lfo' 200))
+  -- rect (80 + 80) 200 200 200
+
+prettyRender $ do
+
+reset draw
+
+draw $ do
+  -- initFFT
+  consoleLog p5gain
+  rect 20 (p5gain*200)  200 200
+
+render $ (freqBin 20)
+
+freqBin x = makeJSVar' (render $ FreqBin x)
+
+render $ freqBin 29
+
+freqBin x = FreqBin x
+
+
+draw $ do
+  -- initFFT
+  -- consoleLog p5gain
+  rect (80 + 80) 20 20 (20 + 2000*(freqBin 20))
+
+  let spectrum = fft.analyze();
+  rect((80 + 80),20,20,(20 + (200 * (Math.sin((frameCount * 2.0e-2))))));
+
+render initFFT
+
+
+  consoleLog p5gain
+
+render $ makeJSVar Gain
+
+:list makeJSVar
 
 
 
 d1 $ slice 8 "0..7" $ "xxx"
-value =
+
 
 jsMod (varFunc frameCount) (varFunc (makeValue 8))
 :t frameCount
@@ -309,9 +350,10 @@ let step4 = "step4: change random variables"
       -- triangle 3 3 3 4 4 4
       box 200 200 200 200 200
       -- pop
-  in draw $ do
-    fill 255 255 255
-    text step4 (-300) 0 blank blank
+in draw $ do
+  fill 255 255 255
+  text (makeJSVar step4) (-300) 0 blank blank
+
     -- translateX (-400)
     -- shape 2
     -- translateX (400)

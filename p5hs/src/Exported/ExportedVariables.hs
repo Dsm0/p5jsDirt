@@ -3,7 +3,9 @@
 module Exported.ExportedVariables where
 
 import P5Expressions
+import P5Render
 import P5Enviornment
+import P5Audio
 
 -- Enviornment Variables ::::::
 
@@ -74,6 +76,13 @@ bevel            =  makeJSVar Bevel
 i :: Num a => ArgEx a
 i                =  makeJSVar I
 
+
+p5gain = makeJSVar' $ render (Gain :: AudioAttributes Integer)
+
+-- initFFT:: ArgEx Integer
+-- initFFT           = makeJSVar InitFFT
+
+-- p5gain :: ArgEx Integer
 
 
 -- tidal Params

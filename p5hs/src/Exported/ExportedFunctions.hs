@@ -5,6 +5,7 @@ module Exported.ExportedFunctions where
 
 import P5Expressions
 import P5Funcs
+import P5Audio
 
 import Modules.P5Transform
 import Modules.P5Shapes
@@ -166,6 +167,12 @@ strokeJoin :: (Show a, Num a, Renderer a) => (ArgEx a) -> ListM RenderAble
 strokeJoin x = pack (StrokeJoin x)
 strokeWeight :: (Show a, Num a, Renderer a) => (ArgEx a) -> ListM RenderAble
 strokeWeight x = pack (StrokeWeight x)
+
+
+initFFT = pack (InitFFT :: AudioAttributes Integer)
+-- this definition for freqBin is a bit janky because I wanted audio related functions
+-- to be in their own type, instead of just a function that composes something of type (ArgEx a)
+freqBin x = makeJSVar' (render $ FreqBin x)
 
 while' :: (Show a, Num a, Renderer a) => (P5BoolConstructor a) -> (ListM RenderAble) -> ListM RenderAble
 -- (DoWhile x y :: P5Loop (P5BoolConstructor ArgExD))
