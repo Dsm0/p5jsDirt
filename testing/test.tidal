@@ -1,7 +1,12 @@
 d1 $ "bd*4" # pSize 400
 
 
+d1 $ "bd"
+
+
 d1 $ "bd*32"
+
+
 
 d1 $ "bd*32"
 # pSize (slow 8 $ 500*sine)
@@ -9,10 +14,12 @@ d1 $ "bd*32"
     |-| pXY 200 200
 
 d1 $ "bd*32"  # gain 2
--- # pSize 200
             # pSize (slow 8 $ sine*300)
              # pXY (slow 8 $ sine*600 + rand*200) (slow 8 $ sine*600 + rand*200)
              |+| pXY (-400) (-400)
+
+
+E:\tidalcyclesWindows\p5jsDirt\p5hs\scripts\BootTidal.hs
 
 d2 $ "hc*4"
 # hpf 200
@@ -27,9 +34,14 @@ let pFont = pS "font"
 
 :{
 :cd /run/media/will/4028-FD6C/M/classes/15112/messingWithStackProjects/p5hs
+/run/media/will/4028-FD6C/M/classes/15112/messingWit
 :!pwd
+
+:browse
+:cd
 :script scripts/BootTidal.hs
 :}
+
 
 let boxtrain = do {
       let fcConstant = (frameCount/5)

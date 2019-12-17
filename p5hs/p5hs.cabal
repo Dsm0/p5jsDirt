@@ -41,7 +41,7 @@ library
       Modules.P5Attributes
 
       HigherOrder.P5Bool
-      HigherOrder.P5Loop
+      HigherOrder.P5Loops
 
       P5Enviornment
       P5FunctionSend
