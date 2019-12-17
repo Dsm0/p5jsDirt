@@ -1,5 +1,7 @@
 module P5Enviornment where
 
+import P5Render
+
 data JSVar =
                             FrameCount
                           | DeltaTime
@@ -63,3 +65,6 @@ instance Show JSVar where
   show Milter           =    "MILTER"
   show Bevel            =    "BEVEL"
   show I                =    "i"
+
+instance Renderer JSVar where
+  render a = show a

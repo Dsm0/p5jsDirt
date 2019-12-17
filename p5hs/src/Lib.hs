@@ -28,10 +28,12 @@ import P5Expressions
 import P5Render
 import P5JSRenderFuncs
 import P5Funcs
+import P5Audio
 import qualified Data.Map as Map_
 import Exported.ExportedFunctions
 import Exported.ExportedVariables
 import ListWriter
+import Turtle
 
 import HigherOrder.P5Bool
 import HigherOrder.P5Loops

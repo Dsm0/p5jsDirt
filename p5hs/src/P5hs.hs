@@ -4,71 +4,47 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveFunctor #-}
 
-module P5hs where
+module P5hs (module P) where
 
 import Data.List
 import Text.Printf
 import Data.Typeable
 import Data.List.Split
 
-import Modules.P5Shapes
-import Modules.P5Color
-import Modules.P53D
-import Modules.P5Transform
-
-import P5Enviornment
-import P5Expressions
-import P5Render
-import P5JSRenderFuncs
-import P5Funcs
 import qualified Data.Map as Map_
--- import Modules.ExportedFunctions
-import Exported.ExportedFunctions
-import Exported.ExportedVariables
+import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
+
+import Turtle
+
+import Modules.P5Transform as P
+import Modules.P5Shapes as P
+import Modules.P53D as P
+import Modules.P5Color as P
+import Modules.DebugFuncs as P
+import Modules.P5Structure as P
+import Modules.P5Setting as P
+import Modules.P5Text as P
+import Modules.P5Image as P
+import Modules.P5Attributes as P
+
+import P5Enviornment as P
+import P5FunctionSend as P
+import P5Expressions as P
+import P5Render as P
+import P5JSRenderFuncs as P
+import P5Funcs as P
+import P5Audio as P
+import Exported.ExportedFunctions as P
+import Exported.ExportedVariables as P
 import ListWriter
 
+import HigherOrder.P5Bool as P
+import HigherOrder.P5Loops as P
 
-import Sound.Tidal.Context
+import UsefulFuncs as P
 
-import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
+import qualified Sound.Tidal.Context as P
+
 
 prettyRender :: (Renderer a) => a -> IO ()
 prettyRender = putStrLn . render
-
-func = do
-  line 2 2 40 500
-  func2 2 3 4
-  listEnumToFunc k
-  translate 2 3 4
-  plane 3 4 5 4
-
-func2 x y z = do
-  translate x y z
-  translate 20 33 478
-
-main = putStrLn "hy"
-
-k = [line y (y*2) (y*y) (y*y*y) | y <- map makeValue [0..20]]
-
--- k = applymatrix
-lx x = [[cos x,          sin x , 0],
-        [negate $ sin x, cos x,  0],
-        [0             ,     0,  1]]
-
-func3 = do
-  line (20*(makeJSVar FrameCount)) 2 40 50
-  rotate (makeJSVar FrameCount)
-  box 200 200 200 200 (200)
-
-func4 = do
-  line (20*(makeJSVar FrameCount)) 2 40 50
-  rotate (20)
-  box 200 200 200 200 (200)
-  -- plane 3 4 5 4
-
-testMessage = listEnumToFunc cube
-  where listgen = map (makeValue . (10*)) [0..10]
-        cube = [box (x + x *0.1) y 2 2 2 | x <- listgen, y <- listgen, y <- listgen]
-
-var x = makeJSVar x
-tP x = makeTidalParam x

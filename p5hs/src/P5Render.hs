@@ -1,5 +1,5 @@
 {-# LANGUAGE TypeSynonymInstances, FlexibleInstances, FlexibleContexts, InstanceSigs #-}
-{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE ExistentialQuantification, UndecidableInstances #-}
 module P5Render where
 
 import P5Expressions
@@ -34,6 +34,7 @@ instance Renderer Double where
 instance Renderer Rational where
   render a = (rationalToFractional . show) a
 
+
 -- instance (Num a, Fractional a) => Renderer a where
 --   render a = (rationalToFractional . show) a
 
@@ -47,19 +48,40 @@ listBetweenBrackets :: (Renderer a) => [[a]] ->JavaScript
 listBetweenBrackets = betweenBrackets . concat
 
 
+makeValue :: (Num a,Show a) => a -> ArgEx a
+makeValue a = ArgEx a (show a)
+makeJSVar :: (Num a, Show b, Renderer b) => b -> ArgEx a
+makeJSVar b = ArgEx (0) (show b)
+makeJSVar' b = ArgEx (0) (b)
+tidalParamString x = "message.get(" ++ (show x) ++ ")"
+tidalParamStringFor fromParam paramToMatch paramToSet = "message.getFrom(" ++ args ++ ")"
+  where args = (intercalate "," . map show) [fromParam,paramToMatch,paramToSet]
+
+makeTidalParam :: (Num a1, Show a2) => a2 -> ArgEx a1
+makeTidalParam x = makeJSVar' $ tidalParamString x
+
+makeTidalParamFor :: (Num a1, Show a2) => a2 -> a2 -> a2 -> ArgEx a1
+makeTidalParamFor fromParam paramToMatch paramToSet = makeJSVar' $ tidalParamStringFor fromParam paramToMatch paramToSet
+
+
 
 -- taken from https://stackoverflow.com/questions/30242668
 -- removePunc xs = [ x | x <- xs, not (x `elem` "?!:;\\\"\'") ]
 
+-- instance Renderer String where
+--   render x = render $ makeJSVar' x
 instance Renderer (RenderAble) where
   render (RenderAble a) = render a
-
-instance (Renderer a) => Renderer [a] where
-  render xs = concatMap ( (++ "\n") . render) xs
 
 instance Renderer (ArgEx a) where
   render argex = f0
     where f0 = varFunc argex
+
+instance {-# OVERLAPPING #-} Renderer String where
+  render = (render . makeJSVar')
+
+instance (Renderer a) => Renderer [a] where
+  render xs = concatMap ( (++ "\n") . render) xs
 
 removePunc xs = [ x | x <- xs, not (x `elem` ",.?!-:;\"\'/=") ]
 
