@@ -30,6 +30,7 @@ resolver: lts-14.16
 #   - wai
 packages:
 - .
+
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:
@@ -41,7 +42,8 @@ packages:
 #
 # extra-deps: []
 extra-deps:
-- tidal-1.4.5@sha256:84c153e926b87b86661798bf01848015e2bc672ab066def66410248caf24aaa5,3655
+- tidal-1.4.7
+# @sha256:84c153e926b87b86661798bf01848015e2bc672ab066def66410248caf24aaa5,3655
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
