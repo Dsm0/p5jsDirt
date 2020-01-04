@@ -1,3 +1,0 @@
-#!/bin/sh
-cd /M/tidalcycles
-stack exec ghci --allow-different-user

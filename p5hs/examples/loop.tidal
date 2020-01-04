@@ -1,9 +1,0 @@
-draw $ do
-  translate (-1000) (-500) 0
-  foriInRange 0 (i #< (mod (frameCount // (mod (frameCount // 800) 8)) 40)) 1 $ do
-    rect 200 20 (20*i) (20*(mod i 40))
-
-prettyRender $ do
-  translate (-1155) (-500) 0
-  foriInRange 0 (i #< (mod (frameCount // 2) (mod frameCount 40))) 1 $ do
-    rect 200 20 (20*i) (20*(mod i 40))
