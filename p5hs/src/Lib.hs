@@ -43,6 +43,3 @@ import UsefulFuncs
 import Sound.Tidal.Context
 
 import Control.Monad.Writer (Writer(..), runWriter, tell, MonadWriter(..))
-
-prettyRender :: (Renderer a) => a -> IO ()
-prettyRender = putStrLn . render

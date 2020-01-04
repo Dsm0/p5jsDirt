@@ -97,3 +97,6 @@ listEnumToFunc :: Monad m => [m a] -> m ()
 listEnumToFunc' [] _ = return ()
 listEnumToFunc' (x:xs) arg = x >>= (\y -> listEnumToFunc' xs arg)
 listEnumToFunc listEnum = listEnumToFunc' listEnum Nothing
+
+prettyRender :: (Renderer a) => a -> IO ()
+prettyRender = putStrLn . render

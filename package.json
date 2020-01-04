@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "early version of tidalcycles-p5js interface",
   "main": "index.js",
+  "bin": "index.js",
   "dependencies": {
     "jquery": "^3.4.1",
     "osc": "2.3.0",
@@ -25,4 +26,8 @@
     "url": "https://github.com/Dsm0/p5jsDirt/issues"
   },
   "homepage": "https://github.com/Dsm0/p5jsDirt#readme"
+  ,
+  "pkg": {
+    "assets": ["web/**/*","web/index.html"]
+  }
 }

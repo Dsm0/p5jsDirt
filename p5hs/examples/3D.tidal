@@ -1,3 +1,5 @@
+d1 $ "bd"
+
 let boxtrain = do {
       let fcConstant = ((frameCount) / 5)
           spd = (sin (fcConstant*0.00016))
@@ -8,7 +10,7 @@ let boxtrain = do {
             rotate $ (fcConstant ** 2 * x)*0.000005
             rotateZ $ (fcConstant * x)*0.0001
             rotateX $ (fcConstant * x)*0.001
-            translate xshift (90 * (x**2)) blank
+            translate xshift (90 * (x**2)) (makeJSVar "undefined")
             box 200 0 (200) 200 blank
             circle 0 ((frameCount**0.3 + frameCount*0.2)/200) 100
             fill ((x*10) + 255*(makeTidalParam "begin")) ((x*10) + 255*(makeTidalParam "begin")) (255*(makeTidalParam "begin"))
@@ -23,15 +25,18 @@ let boxtrain = do {
       translate (-200) (30) 100
       rotateZ 20
 in draw $ do
-  translate (500) (-200) (-1000)
-  -- translate (500) (-200) (-3000)
+  -- translate (500) (-200) (-1000)
   translateX ((lfo' 0.25)*200)
-  -- fill 255 255 255
-  -- rotateX (2000 + (makeTidalParam "begin")*40)
-  rotateZ (200)
-  listEnumToFunc (take (30) $ cycle [b2])
+  fill 255 255 255
+  rotateX (20 + (makeTidalParam "begin")*40)
+  -- rotateZ (200)
+  listEnumToFunc (take (20) $ cycle [b2])
 
 :i frameCount
+
+
+d1 $ "bd*8"
+
 
 draw $ do
   box 20 20 20 (200*(frameCount)) blank

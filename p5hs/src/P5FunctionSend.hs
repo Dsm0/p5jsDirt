@@ -6,11 +6,7 @@ import Sound.Tidal.Context
 import qualified Data.Map as Map_
 
 changeFunc' stream list = sendFunc' list
-<<<<<<< HEAD
   where toEvent' ws we ps pe v = Event (Context []) (Just $ Sound.Tidal.Context.Arc ws we) (Sound.Tidal.Context.Arc ps pe) v
-=======
-  where toEvent' ws we ps pe v = Event (Sound.Tidal.Context.Context []) (Just $ Sound.Tidal.Context.Arc ws we) (Sound.Tidal.Context.Arc ps pe) v
->>>>>>> facfeefab73eb5eaddc739df6bbec8b723ffee3b
           -- where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
         makeFakeMap list_ = Map_.fromList list_
         makeFuncHelp :: [(JavaScript,Value)] -> ControlPattern
@@ -22,24 +18,6 @@ changeFunc' stream list = sendFunc' list
 
 changeFunc stream func newFunction = changeFunc' stream list
   where list = [(func, VS (render newFunction))]
-
-
--- changeFunc' stream list = sendFunc' list
---   -- alternate version of the debug function toEvent from Sound.Tidal.Pattern
---   where toEvent' ws we ps pe v = Event (Sound.Tidal.Context.Arc ws we ps pe) v
---           where [ws',we',ps',pe'] = map toRational [ws,we,ps,pe]
---           -- ws : whole start
---           -- we : whole end
---           -- ps : part start
---           -- pe : part end
---         makeFakeMap list_ = Map_.fromList list_
---         makeFuncHelp :: [(JavaScript,Value)] -> ControlPattern
---         makeFuncHelp y = Pattern $ fakeEvent (makeFakeMap y:: ControlMap)
---           where fakeEvent a notARealArgument = [(toEvent' 0 1 0 1) a]
---         makeFunc :: [(JavaScript,Value)] -> [ControlPattern]
---         makeFunc x = [makeFuncHelp x]
---         sendFunc' = mapM_ (streamFirst stream) . makeFunc
-
 
 resetFunc stream func = changeFunc stream func (makeJSVar "")
 
