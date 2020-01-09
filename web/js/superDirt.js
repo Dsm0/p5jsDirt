@@ -1,6 +1,6 @@
 var messages = [new Thing({})];
 var drawFunc = "box(200,200,200)";
-var assets = {"imageURLs" : {}, "images" : {}};
+var assets = {"images" : {}};
 let microphone, fft;
 
 function setup() {
@@ -14,17 +14,21 @@ function setup() {
   // fft.setInput(microphone);
 };
 
-function preload(){
-  imageURLs = assets["imageURLs"];
-  Object.entries(assets["imageURLs"]).forEach(([key,value]) => {
-    img = createImg(value);
-    img.hide()
-    console.log("IMG:");
-    console.log(img);
-    img.crossOrigin="anonymous";
-    assets["images"][key] = img;
-  })
-};
+function saveShader(shaderName,shaderVert,shaderFrag){
+  shaderAttributes = createShader(shaderVert,shaderFrag)
+  console.log("shader:" + shaderName + " saved to \"shaders\"");
+  assets["shaders"][shaderName] = shader(shaderAttributes);
+  }
+
+function saveImage(imageUrl,name){
+  img = createImg(imageUrl,"imgs/notFound.jpg","anonymous");
+  // console.log(img.crossOrigin);
+  img.hide()
+  console.log("IMG:");
+  console.log(img);
+  img.crossOrigin="anonymous";
+  assets["images"][name] = img;
+  }
 
 function olddraw() {
   background(0);
@@ -93,19 +97,29 @@ function oscEvent(m) {
       drawFunc = paramDict['draw'];
   };
 
-  switch(paramDict['imageURL']) {
-    case "":
-    assets = "";
-    // console.log("things: " + things);
-      break;
+  switch(paramDict["shaderName"]){
     case undefined:
       break;
     default:
+      console.log("was in shaders");
+      shaderName = paramDict["shaderName"]
+      shaderVert = paramDict["shaderVert"]
+      shaderFrag = paramDict["shaderFrag"]
+      console.log("loading shader: " + shaderName)
+      saveShader(shaderName,shaderVert,shaderFrag)
+      console.log(assets)
+  }
+
+  switch(paramDict['imageURL']) {
+    case undefined:
+      break;
+    default:
+      console.log("was in images");
       // lastDrawFunc = "box(200,200,200)";
       imageName = paramDict['imageName'];
-      assets["imageURLs"][imageName] = paramDict['imageURL'];
-      console.log("was in images");
-      preload()
+      saveImage(imageURL,imageName)
+      console.log(assets)
+
   };
 
   if(paramDict['s'] != undefined) {
