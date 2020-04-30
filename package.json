@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "index.js",
   "dependencies": {
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "osc": "2.3.0",
     "express": "4.16.4",
     "socket.io": "^2.3.0",
