@@ -19,7 +19,7 @@ I have plans to add:
 Long-Term:
   - an atom plugin where images are displayed inside the ide (similar to https://atom.io/packages/atom-hydra)
 
-Right now, if you want to get it up and running, feel free to email me at oj8856899@gmail.com , or message me on twitter https://twitter.com/wlfg1rl. I'd be happy to help.
+Right now, if you want to get it up and running, feel free to email me at oj8856899@gmail.com. I'd be happy to help.
 If there's enough interest in this project, ie. enough people want to get it running, I'll add more extensive doccumentation and installation instructions.
 
 But keep in mind: from a usability standpoint, this is an early, early alpha.
