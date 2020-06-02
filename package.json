@@ -25,9 +25,11 @@
   "bugs": {
     "url": "https://github.com/Dsm0/p5jsDirt/issues"
   },
-  "homepage": "https://github.com/Dsm0/p5jsDirt#readme"
-  ,
+  "homepage": "https://github.com/Dsm0/p5jsDirt#readme",
   "pkg": {
-    "assets": ["web/**/*","web/index.html"]
+    "assets": [
+      "web/**/*",
+      "web/index.html"
+    ]
   }
 }

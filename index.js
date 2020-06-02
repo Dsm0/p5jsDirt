@@ -1,3 +1,4 @@
+
 var osc = require("osc"),
     express = require("express"),
     WebSocket = require("ws");
@@ -20,14 +21,28 @@ var getIPAddresses = function () {
     return ipAddresses;
 };
 
+
+
 // Bind to a UDP socket to listen for incoming OSC events.
+// var args = process.argv;
+
+// if(args.length >= 2){
+//     port = parseInt(args[2]);
+// } else {
+//     port = 57110;
+// }
+
+// console.log(port);
+
 var udpPort = new osc.UDPPort({
     localAddress: "0.0.0.0",
     localPort: 57130
 });
 
+
 udpPort.on("ready", function () {
 
+    // console.log(args);
 	var ipAddresses = getIPAddresses();
     console.log("Listening for OSC over UDP.");
     ipAddresses.forEach(function (address) {
