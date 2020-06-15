@@ -1,17 +1,28 @@
 var messages = [new Thing({})];
 var drawFunc = "box(200,200,200)";
 var assets = {"images" : {}};
-let microphone, fft;
+let microphone, fft,level;
 
 function setup() {
+
+  getAudioContext().suspend();
+
   createCanvas(windowWidth, windowHeight,WEBGL);
   textSize(40);
   rockSalt = loadFont("fonts/RockSalt.ttf");
   textFont(rockSalt,48);
   microphone = new p5.AudioIn();
   microphone.start();
-  // fft = new p5.FFT();
-  // fft.setInput(microphone);
+  
+  console.log("click screen once to enable audio-in");
+
+  // amplitude = new p5.Amplitude();
+  // level = amplitude.getLevel();
+
+  fft = new p5.FFT();
+  fft.setInput(microphone);
+
+
 };
 
 function saveShader(shaderName,shaderVert,shaderFrag){
@@ -30,26 +41,6 @@ function saveImage(imageUrl,name){
   assets["images"][name] = img;
   }
 
-function olddraw() {
-  background(0);
-  for (i = messages.length - 1;
-  // for (i = things.length - 1;
-    i >= 0
-    ; i--) {
-    message = messages[i];
-      if (message.alive()) {
-        console.log("about to Draw:");
-        message.draw();
-      }
-      else {
-        message.remove(i);
-      }
-  }
-}
-
-// function parseFuncMessage(funcSlice){
-// }
-
 
 function draw(){
   background(0);
@@ -63,7 +54,6 @@ function draw(){
     console.log(drawFunc);
     console.log(err);
   }
-  // print(message.get("orbit"))
   // for use with p5.hs draw functions that call tidal params
 }
 
@@ -72,8 +62,7 @@ function draw(){
 //     at b.a.default.redraw (p5.min.js:3)
 //     at _draw (p5.min.js:3)
 
-function oscEvent(m) {
-  // console.log("in osc event")
+function oscEvent(m) { // console.log("in osc event")
 
   var i;
   var paramDict = {};
@@ -95,6 +84,15 @@ function oscEvent(m) {
       break;
     default:
       drawFunc = paramDict['draw'];
+  };
+
+  switch(paramDict['setup']) {
+    case "":
+      break;
+    case undefined:
+      break;
+    default:
+      setupCall(paramDict['setup']);
   };
 
   switch(paramDict["shaderName"]){
@@ -124,8 +122,15 @@ function oscEvent(m) {
   };
 
   if(paramDict['s'] != undefined) {
-    // console.log("about to push thing")
     messages.push(new Thing(paramDict));
-    // console.log("things: " + things);
   }
+}
+
+function mousePressed() {
+  userStartAudio();
+}
+
+function setupCall(func){
+  eval(func);
+  console.log("param change evaluated");
 }
