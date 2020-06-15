@@ -29,7 +29,7 @@ class Thing {
     this.paramDict = paramDict;
     this.lastFrom = "";
 
-    console.log(this.paramDict);
+    // console.log(this.paramDict);
   };
 
   get(param) {
