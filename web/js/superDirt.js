@@ -128,6 +128,7 @@ function oscEvent(m) { // console.log("in osc event")
 
 function mousePressed() {
   userStartAudio();
+  console.log("audio enabled");
 }
 
 function setupCall(func){
