@@ -1,6 +1,9 @@
 # p5jsDirt
 originally a 112 project
 
+### Disclaimer ###
+This code is janky as hell. I wrote it in late 2019 for a school project where the goal was to make things work asap. I've updated it here and there to stay up-to-date with p5.js and tidalcycles features, but I've done this with only my own use in mind. I'd be happy to answer any questions people have about it, but I'm not currently in a rush to overhaul and/or doccument it.
+
 [![p5jsDirt Showcase](https://i.imgur.com/5Rxl45h.png)](https://youtu.be/3pytF2Q7dDA)
 video-demo: https://youtu.be/3pytF2Q7dDA
 
