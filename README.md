@@ -1,6 +1,11 @@
 # p5jsDirt
 originally a 112 project
 
+##NOTE:
+I might touch this project again in the future, but `dependabot` was bugging me about library vulnerabilities.
+I half hazardously updated some libs without testing just to get the notifications off my back.
+I'm not sure what issues may rise, but I doubt they'd be catastrophic.
+
 ### Disclaimer ###
 This code is janky as hell. I wrote it in late 2019 for a school project where the goal was to make things work asap. I've updated it here and there to stay up-to-date with p5.js and tidalcycles features, but I've done this with only my own use in mind. I'd be happy to answer any questions people have about it, but I'm not currently in a rush to overhaul and/or doccument it.
 
