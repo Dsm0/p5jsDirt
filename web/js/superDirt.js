@@ -2,6 +2,7 @@ var messages = [new Thing({})];
 var drawFunc = "box(200,200,200)";
 var assets = { "images": {} };
 let microphone, fft, level;
+let audioEnabled = false
 
 function setup() {
 
@@ -46,7 +47,7 @@ function saveImage(imageUrl, name) {
 function draw() {
   background(0);
   var message = messages[messages.length - 1];
-  if(drawFunc === "") return;
+  if (drawFunc === "") return;
   try {
     eval(drawFunc);
   } catch (err) {
@@ -58,11 +59,6 @@ function draw() {
   }
   // for use with p5.hs draw functions that call tidal params
 }
-
-// SyntaxError: missing ) after argument list
-//     at draw (superDirt.js:40)
-//     at b.a.default.redraw (p5.min.js:3)
-//     at _draw (p5.min.js:3)
 
 function oscEvent(m) { // console.log("in osc event")
 
@@ -128,10 +124,15 @@ function oscEvent(m) { // console.log("in osc event")
   }
 }
 
-// function mousePressed() {
-//   userStartAudio();
-//   console.log("audio enabled");
-// }
+function mousePressed() {
+  if (!audioEnabled) {
+    userStartAudio();
+    console.log("audio enabled");
+    audioEnabled = true
+  } else {
+    console.log("audio already enabled");
+  }
+}
 
 function setupCall(func) {
   eval(func);
